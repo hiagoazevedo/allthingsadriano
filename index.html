@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All Things Adriano — Private Beauty Studio · Chicago</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --warm-white: #F7F5F0;
+      --beige:      #EDE8DF;
+      --stone:      #C4BDB0;
+      --stone-lt:   #D9D3C8;
+      --gold:       #A8906A;
+      --gold-lt:    #C4A97D;
+      --sage-dk:    #6C7A68;
+      --sage-bg:    #EBF0E9;
+      --sage-hover: #E0E8DD;
+      --ink:        #1C1917;
+      --ink-mid:    #3D3935;
+      --ink-muted:  #6B6560;
+      --ink-faint:  #9C9790;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--warm-white); color: var(--ink);
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden; cursor: none;
+    }
+
+    /* ── CURSOR ── */
+    .cursor { width:8px; height:8px; background:var(--gold); border-radius:50%; position:fixed; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform 0.1s, width 0.3s, height 0.3s; }
+    .cursor-ring { width:32px; height:32px; border:1px solid var(--gold); border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:transform 0.15s ease-out, opacity 0.3s; opacity:0.5; }
+
+    /* ── NAV ── */
+    nav { position:fixed; top:0; left:0; right:0; z-index:500; padding:28px 64px; display:flex; justify-content:space-between; align-items:center; transition:padding 0.5s, background 0.5s, border-color 0.5s; border-bottom:1px solid transparent; }
+    nav.compact { padding:14px 64px; background:rgba(247,245,240,0.96); backdrop-filter:blur(20px); border-color:var(--stone-lt); }
+    .nav-logo img { height:42px; width:auto; display:block; }
+    .nav-logo-fallback { font-family:'Playfair Display',serif; font-size:1rem; font-weight:400; letter-spacing:0.06em; color:var(--ink); text-decoration:none; }
+    .nav-logo-fallback em { font-style:italic; color:var(--gold); }
+    .nav-links { display:flex; list-style:none; gap:40px; align-items:center; }
+    .nav-links a { text-decoration:none; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-muted); font-weight:400; transition:color 0.3s; position:relative; }
+    .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--gold); transition:width 0.3s; }
+    .nav-links a:hover { color:var(--ink); }
+    .nav-links a:hover::after { width:100%; }
+    .nav-book { font-size:0.65rem !important; letter-spacing:0.25em !important; color:var(--ink) !important; border:1px solid var(--stone) !important; padding:10px 22px !important; transition:background 0.3s, border-color 0.3s, color 0.3s !important; }
+    .nav-book::after { display:none !important; }
+    .nav-book:hover { background:var(--ink) !important; border-color:var(--ink) !important; color:var(--warm-white) !important; }
+
+    /* ── HERO ── */
+    .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; }
+    .hero-left { background:var(--warm-white); display:flex; flex-direction:column; justify-content:flex-end; padding:120px 64px 80px; position:relative; z-index:1; }
+    .hero-eyebrow { font-size:0.62rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); font-weight:400; margin-bottom:36px; opacity:0; animation:revealUp 1s 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .hero-h1 { font-family:'Playfair Display',serif; font-size:clamp(3.2rem,5vw,6rem); font-weight:300; line-height:1.02; letter-spacing:-0.02em; margin-bottom:40px; opacity:0; animation:revealUp 1s 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .hero-h1 em { font-style:italic; font-weight:300; color:var(--gold); }
+    .hero-rule { width:40px; height:1px; background:var(--stone); margin-bottom:28px; opacity:0; animation:revealUp 1s 0.65s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .hero-sub { font-size:0.88rem; line-height:1.85; color:var(--ink-muted); max-width:360px; font-weight:300; margin-bottom:56px; opacity:0; animation:revealUp 1s 0.75s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .hero-actions { display:flex; align-items:center; gap:36px; opacity:0; animation:revealUp 1s 0.9s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .btn-primary { display:inline-block; background:var(--ink); color:var(--warm-white); padding:16px 40px; font-family:'Jost',sans-serif; font-size:0.65rem; font-weight:400; letter-spacing:0.28em; text-transform:uppercase; text-decoration:none; border:1px solid var(--ink); transition:background 0.4s, color 0.4s, border-color 0.4s; }
+    .btn-primary:hover { background:var(--gold); border-color:var(--gold); }
+    .btn-text { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-muted); text-decoration:none; font-weight:400; border-bottom:1px solid var(--stone-lt); padding-bottom:2px; transition:color 0.3s, border-color 0.3s; }
+    .btn-text:hover { color:var(--ink); border-color:var(--ink); }
+    .hero-location { position:absolute; bottom:80px; left:64px; display:flex; align-items:center; gap:14px; opacity:0; animation:revealUp 1s 1.1s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .hero-location::before { content:''; display:block; width:28px; height:1px; background:var(--gold); }
+    .hero-location span { font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--ink-faint); }
+    .hero-right { background:var(--beige); position:relative; overflow:hidden; }
+    .hero-right::before { content:''; position:absolute; inset:0; background:linear-gradient(160deg, transparent 60%, rgba(168,144,106,0.08) 100%); }
+    .hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; }
+    .hero-img-placeholder p { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone); }
+    .hero-detail-card { position:absolute; bottom:60px; right:-1px; background:var(--warm-white); padding:28px 36px; border-left:3px solid var(--gold); opacity:0; animation:revealLeft 1s 1.2s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .hero-detail-label { font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+    .hero-detail-val { font-family:'Playfair Display',serif; font-size:1rem; font-weight:400; }
+
+    /* ── TICKER ── */
+    .ticker { background:var(--ink); padding:14px 0; overflow:hidden; white-space:nowrap; }
+    .ticker-inner { display:inline-flex; animation:ticker 30s linear infinite; }
+    .ticker-item { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone); padding:0 48px; }
+    .ticker-item span { color:var(--gold); margin-right:12px; }
+
+    /* ── SHARED ── */
+    .section-label { font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); font-weight:400; margin-bottom:24px; display:flex; align-items:center; gap:16px; }
+    .section-label::before { content:''; display:block; width:20px; height:1px; background:var(--gold); }
+    .section-h2 { font-family:'Playfair Display',serif; font-size:clamp(2rem,3vw,3.2rem); font-weight:300; line-height:1.1; letter-spacing:-0.01em; margin-bottom:36px; }
+    .section-h2 em { font-style:italic; color:var(--gold); }
+
+    /* ── ABOUT ── */
+    .about { padding:140px 64px; display:grid; grid-template-columns:1fr 1.2fr; gap:100px; align-items:center; }
+    .about-img-frame { aspect-ratio:3/4; background:var(--beige); position:relative; overflow:hidden; }
+    .about-img-frame::after { content:''; position:absolute; bottom:-20px; right:-20px; width:80%; height:80%; border:1px solid var(--stone-lt); z-index:-1; }
+    .about-img-label { position:absolute; top:28px; left:-1px; background:var(--gold); color:var(--warm-white); font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; padding:10px 20px; }
+    .about-img-content { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+    .about-img-content p { font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--stone); }
+    .about-body { font-size:0.9rem; line-height:1.9; color:var(--ink-muted); font-weight:300; margin-bottom:20px; }
+    .about-qualities { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:44px; }
+    .quality-item { padding:20px 24px; background:var(--beige); border-left:2px solid var(--gold); }
+    .quality-title { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); font-weight:400; margin-bottom:6px; }
+    .quality-desc { font-size:0.78rem; color:var(--ink-faint); line-height:1.6; }
+
+    /* ── SERVICES HAIR — dark ── */
+    .services-hair { background:var(--ink); padding:140px 64px; }
+    .services-skin { background:var(--sage-bg); padding:140px 64px; }
+
+    .svc-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:64px; padding-bottom:40px; }
+    .svc-header.dark { border-bottom:1px solid rgba(255,255,255,0.08); }
+    .svc-header.light { border-bottom:1px solid var(--stone-lt); }
+    .svc-header.dark .section-label { color:var(--gold); }
+    .svc-header.dark .section-label::before { background:var(--gold); }
+    .svc-header.dark .section-h2 { color:var(--warm-white); margin-bottom:0; }
+    .svc-header.light .section-label { color:var(--sage-dk); }
+    .svc-header.light .section-label::before { background:var(--sage-dk); }
+    .svc-header.light .section-h2 { color:var(--ink); margin-bottom:0; }
+
+    .svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+
+    .svc-card-dark { background:rgba(255,255,255,0.03); padding:48px 40px; border:1px solid rgba(255,255,255,0.05); transition:background 0.3s, border-color 0.3s; position:relative; overflow:hidden; }
+    .svc-card-dark::before { content:''; position:absolute; top:0; left:0; width:100%; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s; }
+    .svc-card-dark:hover { background:rgba(255,255,255,0.06); border-color:rgba(168,144,106,0.2); }
+    .svc-card-dark:hover::before { transform:scaleX(1); }
+    .svc-card-dark .svc-num { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:300; color:rgba(255,255,255,0.06); line-height:1; margin-bottom:28px; }
+    .svc-card-dark .svc-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:400; color:var(--warm-white); margin-bottom:16px; }
+    .svc-card-dark .svc-desc { font-size:0.82rem; color:rgba(255,255,255,0.4); line-height:1.75; margin-bottom:28px; }
+    .svc-card-dark .svc-footer { display:flex; justify-content:space-between; align-items:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.06); }
+    .svc-card-dark .svc-duration { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.25); }
+    .svc-card-dark .svc-from { font-size:0.75rem; color:var(--gold-lt); letter-spacing:0.05em; }
+
+    .svc-card-light { background:var(--beige); padding:48px 40px; border:1px solid var(--stone-lt); transition:background 0.3s, border-color 0.3s; position:relative; overflow:hidden; }
+    .svc-card-light::before { content:''; position:absolute; top:0; left:0; width:100%; height:2px; background:var(--sage-dk); transform:scaleX(0); transform-origin:left; transition:transform 0.4s; }
+    .svc-card-light:hover { background:var(--sage-hover); border-color:#9AA896; }
+    .svc-card-light:hover::before { transform:scaleX(1); }
+    .svc-card-light .svc-num { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:300; color:var(--stone-lt); line-height:1; margin-bottom:28px; }
+    .svc-card-light .svc-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:400; color:var(--ink); margin-bottom:16px; }
+    .svc-card-light .svc-desc { font-size:0.82rem; color:var(--ink-muted); line-height:1.75; margin-bottom:28px; }
+    .svc-card-light .svc-footer { display:flex; justify-content:space-between; align-items:center; padding-top:20px; border-top:1px solid var(--stone-lt); }
+    .svc-card-light .svc-duration { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-faint); }
+    .svc-card-light .svc-from { font-size:0.75rem; color:var(--sage-dk); letter-spacing:0.05em; }
+
+    /* ── STUDIO ── */
+    .studio { padding:140px 64px; background:var(--warm-white); }
+    .studio-inner { display:grid; grid-template-columns:1.1fr 1fr; gap:100px; align-items:center; }
+    .studio-body { font-size:0.88rem; line-height:1.9; color:var(--ink-muted); margin-bottom:20px; }
+    .studio-pillars { margin-top:48px; display:flex; flex-direction:column; }
+    .pillar { display:flex; gap:24px; padding:24px 0; border-bottom:1px solid var(--beige); align-items:flex-start; }
+    .pillar:last-child { border-bottom:none; }
+    .pillar-num { font-family:'Playfair Display',serif; font-size:0.85rem; color:var(--gold); font-style:italic; min-width:24px; padding-top:2px; }
+    .pillar-text strong { display:block; font-size:0.8rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink); margin-bottom:5px; }
+    .pillar-text p { font-size:0.8rem; color:var(--ink-faint); line-height:1.65; }
+    .studio-right { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:12px; }
+    .studio-img { background:var(--beige); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .studio-img:first-child { grid-row:span 2; aspect-ratio:unset; }
+    .studio-img p { font-size:0.58rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--stone); }
+
+    /* ── QUOTE ── */
+    .quote-section { background:var(--warm-white); padding:120px 64px; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; }
+    .quote-section::before, .quote-section::after { content:''; position:absolute; left:64px; right:64px; height:1px; background:var(--beige); }
+    .quote-section::before { top:0; } .quote-section::after { bottom:0; }
+    .quote-inner { max-width:680px; }
+    .quote-mark { font-family:'Playfair Display',serif; font-size:5rem; line-height:0.5; color:var(--stone-lt); display:block; margin-bottom:32px; }
+    .quote-text { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,2.2rem); font-weight:300; font-style:italic; line-height:1.4; color:var(--ink-mid); margin-bottom:28px; }
+    .quote-attr { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background:var(--ink); padding:140px 64px; }
+    .testimonials-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:64px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .testimonials-header .section-label { color:var(--gold); }
+    .testimonials-header .section-label::before { background:var(--gold); }
+    .testimonials-header .section-h2 { color:var(--warm-white); margin-bottom:0; }
+    .google-badge { display:flex; align-items:center; gap:14px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); padding:14px 22px; }
+    .google-g { font-size:1.2rem; font-weight:900; color:var(--warm-white); font-family:'Jost',sans-serif; }
+    .google-info { display:flex; flex-direction:column; gap:3px; }
+    .google-info .google-name { font-size:0.72rem; color:var(--warm-white); letter-spacing:0.05em; }
+    .google-stars { color:var(--gold); font-size:0.75rem; letter-spacing:0.08em; }
+    .google-info .google-score { font-size:0.62rem; color:var(--stone); letter-spacing:0.05em; }
+    .reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+    .review-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); padding:36px 32px; position:relative; transition:background 0.3s; }
+    .review-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s; }
+    .review-card:hover { background:rgba(255,255,255,0.06); }
+    .review-card:hover::before { transform:scaleX(1); }
+    .review-stars { color:var(--gold); font-size:0.75rem; letter-spacing:0.08em; display:block; margin-bottom:20px; }
+    .review-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:16px; }
+    .review-name { font-size:0.88rem; font-weight:500; color:var(--warm-white); }
+    .review-date { font-size:0.68rem; color:rgba(255,255,255,0.3); letter-spacing:0.05em; }
+    .review-text { font-size:0.82rem; color:rgba(255,255,255,0.45); line-height:1.75; margin-bottom:28px; font-style:italic; }
+    .review-footer { display:flex; justify-content:space-between; align-items:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.06); }
+    .review-via { font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.2); }
+    .review-verified { font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); opacity:0.6; }
+
+    /* ── BOOKING ── */
+    .booking { background:var(--beige); padding:140px 64px; display:grid; grid-template-columns:1fr 1.3fr; gap:100px; align-items:start; }
+    .booking-body { font-size:0.88rem; color:var(--ink-muted); line-height:1.9; margin-bottom:48px; }
+    .booking-meta { display:flex; flex-direction:column; }
+    .meta-item { display:flex; align-items:flex-start; gap:20px; padding:20px 0; border-bottom:1px solid var(--stone-lt); }
+    .meta-item:last-child { border-bottom:none; }
+    .meta-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:6px; }
+    .meta-label { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:4px; }
+    .meta-val { font-size:0.85rem; color:var(--ink-mid); font-weight:300; line-height:1.65; }
+    .booking-widget-wrap { background:var(--warm-white); border:1px solid var(--stone-lt); overflow:hidden; }
+    .widget-header { padding:20px 28px; border-bottom:1px solid var(--beige); display:flex; justify-content:space-between; align-items:center; }
+    .widget-header-title { font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--ink-muted); }
+    .widget-header-note { font-size:0.6rem; letter-spacing:0.12em; color:var(--stone); }
+    .vagaro-cta { padding:72px 48px; display:flex; align-items:center; justify-content:center; }
+    .vagaro-cta-inner { text-align:center; max-width:380px; }
+    .vagaro-cta-ornament { display:block; font-size:1rem; color:var(--gold); letter-spacing:0.4em; margin-bottom:28px; opacity:0.5; }
+    .vagaro-cta-label { font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+    .vagaro-cta-heading { font-family:'Playfair Display',serif; font-size:2rem; font-weight:300; line-height:1.15; letter-spacing:-0.01em; color:var(--ink); margin-bottom:24px; }
+    .vagaro-cta-heading em { font-style:italic; color:var(--gold); }
+    .vagaro-cta-rule { width:32px; height:1px; background:var(--stone-lt); margin:0 auto 24px; }
+    .vagaro-cta-body { font-size:0.82rem; color:var(--ink-muted); line-height:1.85; margin-bottom:40px; }
+    .vagaro-cta-btn { display:inline-block; }
+    .vagaro-cta-note { font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-faint); margin-top:20px; }
+
+    /* ── FOOTER ── */
+    footer { background:var(--ink); padding:64px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:48px; align-items:start; }
+    .footer-logo { height:38px; width:auto; display:block; margin-bottom:20px; }
+    .footer-brand p { font-size:0.75rem; color:rgba(255,255,255,0.3); line-height:1.7; }
+    .footer-col-title { font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+    .footer-col a, .footer-col p { display:block; font-size:0.78rem; color:rgba(255,255,255,0.4); text-decoration:none; margin-bottom:10px; transition:color 0.2s; line-height:1.6; }
+    .footer-col a:hover { color:var(--warm-white); }
+    .footer-bottom { background:var(--ink); border-top:1px solid rgba(255,255,255,0.06); padding:20px 64px; display:flex; justify-content:space-between; align-items:center; }
+    .footer-bottom p { font-size:0.62rem; color:rgba(255,255,255,0.2); letter-spacing:0.08em; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes revealUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+    @keyframes revealLeft { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:none; } }
+    @keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:none; }
+    .reveal-delay-1 { transition-delay:0.1s; }
+    .reveal-delay-2 { transition-delay:0.2s; }
+    .reveal-delay-3 { transition-delay:0.3s; }
+    .reveal-delay-4 { transition-delay:0.4s; }
+
+    /* ── HAMBURGER ── */
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+    .hamburger span { display:block; width:24px; height:1px; background:var(--ink); transition:transform 0.3s, opacity 0.3s; }
+    .hamburger.open span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
+    .mobile-menu { display:none; position:fixed; inset:0; z-index:490; background:rgba(247,245,240,0.98); backdrop-filter:blur(20px); flex-direction:column; align-items:center; justify-content:center; gap:40px; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:'Playfair Display',serif; font-size:2rem; font-weight:300; color:var(--ink); text-decoration:none; letter-spacing:0.05em; transition:color 0.3s; }
+    .mobile-menu a:hover { color:var(--gold); }
+    .mobile-menu .mob-book { font-family:'Jost',sans-serif; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; border:1px solid var(--ink); padding:14px 40px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      body { cursor:auto; }
+      .cursor, .cursor-ring { display:none; }
+      nav { padding:16px 24px; }
+      nav.compact { padding:12px 24px; }
+      .nav-logo img { height:32px; }
+      .nav-links { display:none; }
+      .hamburger { display:flex; }
+      .hero { grid-template-columns:1fr; min-height:auto; }
+      .hero-right { min-height:55vw; order:-1; }
+      .hero-left { padding:48px 24px 64px; justify-content:flex-start; }
+      .hero-location { left:24px; bottom:24px; }
+      .about { grid-template-columns:1fr; padding:80px 24px; gap:48px; }
+      .about-img-frame { aspect-ratio:4/3; }
+      .about-qualities { grid-template-columns:1fr 1fr; }
+      .services-hair, .services-skin { padding:80px 24px; }
+      .svc-grid { grid-template-columns:1fr; gap:2px; }
+      .studio { padding:80px 24px; }
+      .studio-inner { grid-template-columns:1fr; gap:48px; }
+      .studio-right { grid-template-columns:1fr 1fr; }
+      .studio-img:first-child { grid-row:auto; aspect-ratio:3/4; }
+      .quote-section { padding:80px 24px; }
+      .quote-section::before, .quote-section::after { left:24px; right:24px; }
+      .testimonials { padding:80px 24px; }
+      .testimonials-header { flex-direction:column; align-items:flex-start; gap:28px; }
+      .reviews-grid { grid-template-columns:1fr; }
+      .booking { grid-template-columns:1fr; padding:80px 24px; gap:48px; }
+      footer { padding:48px 24px; grid-template-columns:1fr; gap:36px; }
+      .footer-bottom { padding:16px 24px; flex-direction:column; gap:8px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about"        onclick="closeMobile()">About</a>
+    <a href="#services-hair" onclick="closeMobile()">Hair</a>
+    <a href="#services-skin" onclick="closeMobile()">Skin</a>
+    <a href="#studio"       onclick="closeMobile()">The Studio</a>
+    <a href="#booking" class="mob-book" onclick="closeMobile()">Schedule</a>
+  </div>
+
+  <!-- ── NAV ── -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">
+      <!--
+        TO ACTIVATE LOGO: Replace the src below with the real logo path.
+        Use the transparent PNG version (logo_transparent.png).
+        For dark nav variant, use logo_footer.png (brightened version).
+        Example: <img src="assets/logo.png" alt="All Things Adriano" />
+      -->
+      <img src="assets/logo.png" alt="All Things Adriano"
+           onerror="this.style.display='none';document.getElementById('nav-logo-text').style.display='inline'"/>
+      <span id="nav-logo-text" style="display:none;font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;letter-spacing:0.06em;color:var(--ink);">
+        All Things <em style="font-style:italic;color:var(--gold);">Adriano</em>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services-hair">Hair</a></li>
+      <li><a href="#services-skin">Skin</a></li>
+      <li><a href="#studio">The Studio</a></li>
+      <li><a href="#booking" class="nav-book">Schedule</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Private Boutique Studio &nbsp;·&nbsp; Chicago, IL</p>
+      <h1 class="hero-h1">
+        Beauty with<br>
+        <em>intention.</em><br>
+        Precision<br>
+        with <em>care.</em>
+      </h1>
+      <div class="hero-rule"></div>
+      <p class="hero-sub">
+        A private one-on-one experience for clients who value expertise,
+        discretion, and the quiet confidence of being truly cared for.
+      </p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn-primary">Schedule a Consultation</a>
+        <a href="#services-hair" class="btn-text">View Services</a>
+      </div>
+      <div class="hero-location"><span>Chicago, Illinois</span></div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-img-placeholder"><p>Studio photography</p></div>
+      <div class="hero-detail-card">
+        <div class="hero-detail-label">By appointment only</div>
+        <div class="hero-detail-val">Private · 1:1 · Focused</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TICKER ── -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-inner">
+      <span class="ticker-item"><span>✦</span> Hair Expertise</span>
+      <span class="ticker-item"><span>✦</span> Skin Consultation</span>
+      <span class="ticker-item"><span>✦</span> Private Studio</span>
+      <span class="ticker-item"><span>✦</span> Chicago, IL</span>
+      <span class="ticker-item"><span>✦</span> By Appointment</span>
+      <span class="ticker-item"><span>✦</span> 1:1 Experience</span>
+      <span class="ticker-item"><span>✦</span> All Things Adriano</span>
+      <span class="ticker-item"><span>✦</span> Hair Expertise</span>
+      <span class="ticker-item"><span>✦</span> Skin Consultation</span>
+      <span class="ticker-item"><span>✦</span> Private Studio</span>
+      <span class="ticker-item"><span>✦</span> Chicago, IL</span>
+      <span class="ticker-item"><span>✦</span> By Appointment</span>
+      <span class="ticker-item"><span>✦</span> 1:1 Experience</span>
+      <span class="ticker-item"><span>✦</span> All Things Adriano</span>
+    </div>
+  </div>
+
+  <!-- ── ABOUT ── -->
+  <section class="about" id="about">
+    <div class="about-left reveal">
+      <div class="about-img-frame">
+        <div class="about-img-label">Adriano · Chicago</div>
+        <div class="about-img-content"><p>Portrait photography</p></div>
+      </div>
+    </div>
+    <div class="about-right">
+      <p class="section-label reveal">About</p>
+      <h2 class="section-h2 reveal reveal-delay-1">
+        Technical depth.<br><em>Human warmth.</em>
+      </h2>
+      <p class="about-body reveal reveal-delay-2">
+        Adriano brings a specialist's experience to every appointment — whether working
+        with hair or skin. Trained with an eye for detail and a respect for the individual,
+        his approach is never rushed, never generic.
+      </p>
+      <p class="about-body reveal reveal-delay-2">
+        This is a private studio, not a traditional salon. Every client receives undivided
+        attention in a calm, discreet environment — where expertise leads, and comfort follows.
+      </p>
+      <div class="about-qualities reveal reveal-delay-3">
+        <div class="quality-item">
+          <div class="quality-title">Perfection</div>
+          <div class="quality-desc">Technical mastery applied with accuracy to every service.</div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-title">Discretion</div>
+          <div class="quality-desc">A private environment where you are the only focus.</div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-title">Expertise</div>
+          <div class="quality-desc">Deep knowledge across hair and skin, not breadth without depth.</div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-title">Safety</div>
+          <div class="quality-desc">An inclusive, affirming space for every client, always.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES — HAIR ── -->
+  <section class="services-hair" id="services-hair">
+    <div class="svc-header dark">
+      <div>
+        <p class="section-label">Hair Services</p>
+        <h2 class="section-h2">Hair</h2>
+      </div>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card-dark reveal">
+        <div class="svc-num">01</div>
+        <div class="svc-name">Precision Cut</div>
+        <p class="svc-desc">A structured, personalized cut designed around your face, hair texture, and lifestyle. No two cuts are the same.</p>
+        <div class="svc-footer">
+          <span class="svc-duration">45 – 60 min</span>
+          <span class="svc-from">From $85</span>
+        </div>
+      </div>
+      <div class="svc-card-dark reveal reveal-delay-1">
+        <div class="svc-num">02</div>
+        <div class="svc-name">Color & Toning</div>
+        <p class="svc-desc">Full color, highlights, balayage, and toning — executed with fineness for seamless, lasting results.</p>
+        <div class="svc-footer">
+          <span class="svc-duration">2 – 3.5 hrs</span>
+          <span class="svc-from">From $140</span>
+        </div>
+      </div>
+      <div class="svc-card-dark reveal reveal-delay-2">
+        <div class="svc-num">03</div>
+        <div class="svc-name">Treatment & Restoration</div>
+        <p class="svc-desc">Targeted treatments for damage, frizz, or thinning hair. A clinical approach to hair health, not just appearance.</p>
+        <div class="svc-footer">
+          <span class="svc-duration">60 – 90 min</span>
+          <span class="svc-from">From $95</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES — SKIN ── -->
+  <section class="services-skin" id="services-skin">
+    <div class="svc-header light">
+      <div>
+        <p class="section-label" style="color:var(--sage-dk);">Skin Services</p>
+        <h2 class="section-h2" style="color:var(--ink);margin-bottom:0;">Skin</h2>
+      </div>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card-light reveal">
+        <div class="svc-num">01</div>
+        <div class="svc-name">Skin Consultation</div>
+        <p class="svc-desc">A thorough one-on-one assessment of your skin's needs, concerns, and long-term goals. The foundation of everything.</p>
+        <div class="svc-footer">
+          <span class="svc-duration">45 min</span>
+          <span class="svc-from">From $65</span>
+        </div>
+      </div>
+      <div class="svc-card-light reveal reveal-delay-1">
+        <div class="svc-num">02</div>
+        <div class="svc-name">Facial Treatment</div>
+        <p class="svc-desc">Customized facial protocols tailored to your skin — not a menu item. Every session adapts to what your skin needs that day.</p>
+        <div class="svc-footer">
+          <span class="svc-duration">60 – 75 min</span>
+          <span class="svc-from">From $110</span>
+        </div>
+      </div>
+      <div class="svc-card-light reveal reveal-delay-2">
+        <div class="svc-num">03</div>
+        <div class="svc-name">Skin + Hair Session</div>
+        <p class="svc-desc">A combined appointment for clients seeking a fully integrated beauty experience in a single private session.</p>
+        <div class="svc-footer">
+          <span class="svc-duration">2.5 – 3 hrs</span>
+          <span class="svc-from">From $220</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE STUDIO ── -->
+  <section class="studio" id="studio">
+    <div class="studio-inner">
+      <div class="studio-left">
+        <p class="section-label reveal">The Studio Experience</p>
+        <h2 class="section-h2 reveal reveal-delay-1">
+          Not a salon.<br><em>A sanctuary.</em>
+        </h2>
+        <p class="studio-body reveal reveal-delay-2">
+          All Things Adriano is a private, appointment-only studio in Chicago.
+          There are no waiting areas, no overlapping clients, no ambient noise of a
+          busy floor. Only you, Adriano, and the work.
+        </p>
+        <p class="studio-body reveal reveal-delay-2">
+          The space is designed to feel calm and considered — reflective of the
+          care behind every service offered within it.
+        </p>
+        <div class="studio-pillars reveal reveal-delay-3">
+          <div class="pillar">
+            <div class="pillar-num">i.</div>
+            <div class="pillar-text">
+              <strong>One client at a time</strong>
+              <p>Your appointment is yours entirely. No distractions, no interruptions.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-num">ii.</div>
+            <div class="pillar-text">
+              <strong>Inclusive by design</strong>
+              <p>A safe, affirming space for LGBTQ+ clients and all who value discretion.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-num">iii.</div>
+            <div class="pillar-text">
+              <strong>Quality without compromise</strong>
+              <p>Professional-grade products and techniques, never diluted for volume.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="studio-right reveal reveal-delay-2">
+        <div class="studio-img"><p>Studio image</p></div>
+        <div class="studio-img"><p>Detail image</p></div>
+        <div class="studio-img"><p>Texture image</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── QUOTE ── -->
+  <div class="quote-section">
+    <div class="quote-inner reveal">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">
+        The right client isn't looking for the best price.
+        They're looking for someone who truly understands them.
+      </p>
+      <span class="quote-attr">Adriano · Chicago</span>
+    </div>
+  </div>
+
+  <!-- ── TESTIMONIALS ── -->
+  <section class="testimonials" id="reviews">
+    <div class="testimonials-header">
+      <div>
+        <p class="section-label">Client Reviews</p>
+        <h2 class="section-h2">
+          What clients<br><em>are saying.</em>
+        </h2>
+      </div>
+      <div class="google-badge reveal">
+        <span class="google-g">G</span>
+        <div class="google-info">
+          <span class="google-name">Google Reviews</span>
+          <span class="google-stars">★★★★★</span>
+          <span class="google-score">5.0 · Verified</span>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <span class="review-stars">★★★★★</span>
+        <div class="review-header">
+          <span class="review-name">Sarah M.</span>
+          <span class="review-date">2 weeks ago</span>
+        </div>
+        <p class="review-text">"Adriano is in a league of his own. The attention to detail, the calm environment, the results — I've never experienced anything like it. Worth every penny."</p>
+        <div class="review-footer">
+          <span class="review-via">via Google</span>
+          <span class="review-verified">✦ Verified</span>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-1">
+        <span class="review-stars">★★★★★</span>
+        <div class="review-header">
+          <span class="review-name">James T.</span>
+          <span class="review-date">1 month ago</span>
+        </div>
+        <p class="review-text">"Finally found a stylist who actually listens. The studio is immaculate, private, and the work speaks for itself. My color has never looked this natural."</p>
+        <div class="review-footer">
+          <span class="review-via">via Google</span>
+          <span class="review-verified">✦ Verified</span>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-2">
+        <span class="review-stars">★★★★★</span>
+        <div class="review-header">
+          <span class="review-name">Priya K.</span>
+          <span class="review-date">3 weeks ago</span>
+        </div>
+        <p class="review-text">"As someone who is particular about my hair, finding Adriano was a revelation. The skin consultation was equally impressive. A true specialist."</p>
+        <div class="review-footer">
+          <span class="review-via">via Google</span>
+          <span class="review-verified">✦ Verified</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BOOKING ── -->
+  <section class="booking" id="booking">
+    <div class="booking-left">
+      <p class="section-label reveal">Schedule</p>
+      <h2 class="section-h2 reveal reveal-delay-1">
+        Reserve your<br><em>consultation.</em>
+      </h2>
+      <p class="booking-body reveal reveal-delay-2">
+        All appointments begin with a brief consultation to ensure
+        Adriano fully understands your needs before any service begins.
+      </p>
+      <div class="booking-meta reveal reveal-delay-3">
+        <div class="meta-item">
+          <div class="meta-dot"></div>
+          <div>
+            <div class="meta-label">Location</div>
+            <div class="meta-val">We're located in the historic Bryn Mawr<br>Neighbourhood in Edgewater, Chicago</div>
+          </div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-dot"></div>
+          <div>
+            <div class="meta-label">Parking</div>
+            <div class="meta-val">Free private &amp; gated parking available<br>for all clients</div>
+          </div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-dot"></div>
+          <div>
+            <div class="meta-label">Availability</div>
+            <div class="meta-val">Tuesday – Saturday<br>By appointment only</div>
+          </div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-dot"></div>
+          <div>
+            <div class="meta-label">New Clients</div>
+            <div class="meta-val">Consultation recommended<br>before first service appointment</div>
+          </div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-dot"></div>
+          <div>
+            <div class="meta-label">Online Booking</div>
+            <div class="meta-val">Secure scheduling via Vagaro<br>Available 24 hours</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="booking-widget-wrap reveal reveal-delay-2">
+      <div class="widget-header">
+        <span class="widget-header-title">Online Scheduling</span>
+        <span class="widget-header-note">Powered by Vagaro</span>
+      </div>
+      <div class="vagaro-cta">
+        <div class="vagaro-cta-inner">
+          <span class="vagaro-cta-ornament">✦ &nbsp; ✦ &nbsp; ✦</span>
+          <p class="vagaro-cta-label">Book your appointment</p>
+          <h3 class="vagaro-cta-heading">Reserve your session<br><em>with Adriano.</em></h3>
+          <div class="vagaro-cta-rule"></div>
+          <p class="vagaro-cta-body">
+            Secure online scheduling, available 24 hours a day.
+            Select your service, choose a time, and confirm your
+            appointment — all in one seamless step.
+          </p>
+          <a href="https://www.vagaro.com/allthingsadrianocom/book-now"
+             target="_blank" rel="noopener"
+             class="btn-primary vagaro-cta-btn">
+            Book Now on Vagaro
+          </a>
+          <p class="vagaro-cta-note">Redirects to Vagaro's secure booking page</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-brand">
+      <!--
+        FOOTER LOGO: Use the brightened version for dark background.
+        Replace src with: assets/logo-light.png
+      -->
+      <img class="footer-logo" src="assets/logo-light.png" alt="All Things Adriano"
+           onerror="this.style.display='none';document.getElementById('footer-logo-text').style.display='block'"/>
+      <span id="footer-logo-text" style="display:none;font-family:'Playfair Display',serif;font-size:1rem;color:var(--warm-white);letter-spacing:0.06em;margin-bottom:16px;display:block;">
+        All Things <em style="font-style:italic;color:var(--gold);">Adriano</em>
+      </span>
+      <p>Private boutique beauty studio in Chicago. By appointment only. Hair and skin services for aligned clients.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigate</div>
+      <a href="#about">About Adriano</a>
+      <a href="#services-hair">Hair Services</a>
+      <a href="#services-skin">Skin Services</a>
+      <a href="#studio">The Studio</a>
+      <a href="#booking">Schedule</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Connect</div>
+      <a href="https://www.vagaro.com/allthingsadrianocom" target="_blank" rel="noopener">Vagaro Profile</a>
+      <p>Edgewater · Chicago, Illinois</p>
+      <p>By appointment only</p>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025 All Things Adriano · All rights reserved</p>
+    <p>Chicago, IL · Private Studio</p>
+  </div>
+
+  <script>
+    // ── CURSOR (desktop / fine pointer only)
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursor-ring');
+    if (window.matchMedia('(pointer: fine)').matches) {
+      document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top  = e.clientY + 'px';
+        setTimeout(() => { ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }, 80);
+      });
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2)'; ring.style.opacity = '0.15'; });
+        el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.opacity = '0.5'; });
+      });
+    }
+
+    // ── NAVBAR COMPACT ON SCROLL
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('compact', window.scrollY > 40);
+    });
+
+    // ── SMOOTH SCROLL
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+
+    // ── SCROLL REVEAL
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── MOBILE MENU
+    function toggleMobile() {
+      const menu = document.getElementById('mobileMenu');
+      const ham  = document.getElementById('hamburger');
+      const open = menu.classList.toggle('open');
+      ham.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMobile() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  </script>
+
+</body>
+</html>
