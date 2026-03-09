@@ -1,0 +1,37 @@
+/* ══════════════════════════════════════════
+   testimonials.css — Reviews section
+   Padding via .section-pad, grid via .grid-3,
+   ::before geometry via .card-hover-line (components.css)
+   ══════════════════════════════════════════ */
+
+.testimonials { background:var(--ink); }
+.testimonials-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:64px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.08); }
+.testimonials-header .section-label { color:var(--gold); }
+.testimonials-header .section-label::before { background:var(--gold); }
+.testimonials-header .section-h2 { color:var(--warm-white); margin-bottom:0; }
+
+.google-badge { display:flex; align-items:center; gap:14px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); padding:14px 22px; }
+.google-g { font-size:1.2rem; font-weight:900; color:var(--warm-white); font-family:'Jost',sans-serif; }
+.google-info { display:flex; flex-direction:column; gap:3px; }
+.google-info .google-name { font-size:0.72rem; color:var(--warm-white); letter-spacing:0.05em; }
+.google-stars { color:var(--gold); font-size:0.75rem; letter-spacing:0.08em; }
+.google-info .google-score { font-size:0.62rem; color:var(--stone); letter-spacing:0.05em; }
+
+/* Review cards — ::before color only (geometry from .card-hover-line) */
+.review-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); padding:36px 32px; transition:background 0.3s; }
+.review-card::before { background:var(--gold); }
+.review-card:hover { background:rgba(255,255,255,0.06); }
+.review-stars { color:var(--gold); font-size:0.75rem; letter-spacing:0.08em; display:block; margin-bottom:20px; }
+.review-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:16px; }
+.review-name { font-size:0.88rem; font-weight:500; color:var(--warm-white); }
+.review-date { font-size:0.68rem; color:rgba(255,255,255,0.3); letter-spacing:0.05em; }
+.review-text { font-size:0.82rem; color:rgba(255,255,255,0.45); line-height:1.75; margin-bottom:28px; font-style:italic; }
+.review-footer { display:flex; justify-content:space-between; align-items:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.06); }
+.review-via { font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.2); }
+.review-verified { font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); opacity:0.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .testimonials { padding:80px 24px; }
+  .testimonials-header { flex-direction:column; align-items:flex-start; gap:28px; }
+}

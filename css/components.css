@@ -1,0 +1,64 @@
+/* ══════════════════════════════════════════
+   components.css — Shared UI utilities
+   Resolves all cross-section duplications
+   ══════════════════════════════════════════ */
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display:inline-block; background:var(--ink); color:var(--warm-white);
+  padding:16px 40px 18px; font-family:'Jost',sans-serif; font-size:0.65rem;
+  font-weight:400; letter-spacing:0.28em; text-transform:uppercase;
+  text-decoration:none; border:1px solid var(--ink);
+  transition:background 0.4s, color 0.4s, border-color 0.4s;
+}
+.btn-primary:hover { background:var(--gold); border-color:var(--gold); }
+
+.btn-text {
+  font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--ink-muted); text-decoration:none; font-weight:400;
+  border-bottom:1px solid var(--stone-lt); padding-bottom:2px;
+  transition:color 0.3s, border-color 0.3s;
+}
+.btn-text:hover { color:var(--ink); border-color:var(--ink); }
+
+/* ── CARD HOVER LINE ──────────────────────
+   Resolves 3 identical ::before blocks:
+   .svc-card-dark, .svc-card-light, .review-card
+   Section files only add `background:` color.
+   ──────────────────────────────────────── */
+.card-hover-line { position:relative; overflow:hidden; }
+.card-hover-line::before {
+  content:''; position:absolute; top:0; left:0;
+  width:100%; height:2px; transform:scaleX(0);
+  transform-origin:left; transition:transform 0.4s;
+}
+.card-hover-line:hover::before { transform:scaleX(1); }
+
+/* ── LAYOUT UTILITIES ──────────────────────
+   Resolves 6 identical padding declarations (.section-pad)
+   and 2 identical grid declarations (.grid-3)
+   ──────────────────────────────────────── */
+.section-pad { padding:140px 64px; }
+
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+
+/* ── SERVICE HEADER BASE ──────────────────
+   Shared structure between dark and light variants.
+   Color overrides live in services-hair.css / services-skin.css.
+   ──────────────────────────────────────── */
+.svc-header {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:64px; padding-bottom:40px;
+}
+
+/* ── TYPOGRAPHY UTILITIES ──────────────────
+   .body-text  — standard body copy (light background)
+   .img-caption — image placeholder / caption labels
+   ──────────────────────────────────────── */
+.body-text   { font-size:0.82rem; line-height:1.85; color:var(--ink-muted); }
+.img-caption { font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--stone); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .grid-3 { grid-template-columns:1fr; }
+}

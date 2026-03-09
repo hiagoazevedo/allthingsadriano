@@ -1,0 +1,29 @@
+/* ══════════════════════════════════════════
+   services-hair.css — Hair services section (dark)
+   Padding via .section-pad, grid via .grid-3,
+   ::before geometry via .card-hover-line (components.css)
+   ══════════════════════════════════════════ */
+
+.services-hair { background:var(--ink); }
+
+/* Dark header variant */
+.svc-header.dark { border-bottom:1px solid rgba(255,255,255,0.08); }
+.svc-header.dark .section-label { color:var(--gold); }
+.svc-header.dark .section-label::before { background:var(--gold); }
+.svc-header.dark .section-h2 { color:var(--warm-white); margin-bottom:0; }
+
+/* Dark service cards — ::before color only (geometry from .card-hover-line) */
+.svc-card-dark { background:rgba(255,255,255,0.03); padding:48px 40px; border:1px solid rgba(255,255,255,0.05); transition:background 0.3s, border-color 0.3s; }
+.svc-card-dark::before { background:var(--gold); }
+.svc-card-dark:hover { background:rgba(255,255,255,0.06); border-color:rgba(168,144,106,0.2); }
+.svc-card-dark .svc-num { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:300; color:rgba(255,255,255,0.06); line-height:1; margin-bottom:28px; }
+.svc-card-dark .svc-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:400; color:var(--warm-white); margin-bottom:16px; }
+.svc-card-dark .svc-desc { font-size:0.82rem; color:rgba(255,255,255,0.4); line-height:1.75; margin-bottom:28px; }
+.svc-card-dark .svc-footer { display:flex; justify-content:space-between; align-items:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.06); }
+.svc-card-dark .svc-duration { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.25); }
+.svc-card-dark .svc-from { font-size:0.75rem; color:var(--gold-lt); letter-spacing:0.05em; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .services-hair { padding:80px 24px; }
+}

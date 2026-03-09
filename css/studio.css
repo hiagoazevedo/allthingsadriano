@@ -1,0 +1,38 @@
+/* ══════════════════════════════════════════
+   studio.css — Studio section + Quote section
+   Studio padding via .section-pad (components.css)
+   ══════════════════════════════════════════ */
+
+/* ── STUDIO ── */
+.studio { background:var(--warm-white); }
+.studio-inner { display:grid; grid-template-columns:1.1fr 1fr; gap:100px; align-items:center; }
+.studio-body { font-size:0.88rem; line-height:1.9; color:var(--ink-muted); margin-bottom:20px; }
+.studio-pillars { margin-top:48px; display:flex; flex-direction:column; }
+.pillar { display:flex; gap:24px; padding:24px 0; border-bottom:1px solid var(--beige); align-items:flex-start; }
+.pillar:last-child { border-bottom:none; }
+.pillar-num { font-family:'Playfair Display',serif; font-size:0.85rem; color:var(--gold); font-style:italic; min-width:24px; padding-top:2px; }
+.pillar-text strong { display:block; font-size:0.8rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink); margin-bottom:5px; }
+.pillar-text p { font-size:0.8rem; color:var(--ink-faint); line-height:1.65; }
+.studio-right { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:12px; }
+.studio-img { background:var(--beige); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.studio-img:first-child { grid-row:span 2; aspect-ratio:unset; }
+
+/* ── QUOTE ── */
+.quote-section { background:var(--warm-white); padding:120px 64px; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; }
+.quote-section::before, .quote-section::after { content:''; position:absolute; left:64px; right:64px; height:1px; background:var(--beige); }
+.quote-section::before { top:0; }
+.quote-section::after  { bottom:0; }
+.quote-inner { max-width:680px; }
+.quote-mark { font-family:'Playfair Display',serif; font-size:5rem; line-height:0.5; color:var(--stone-lt); display:block; margin-bottom:32px; }
+.quote-text { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,2.2rem); font-weight:300; font-style:italic; line-height:1.4; color:var(--ink-mid); margin-bottom:28px; }
+.quote-attr { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .studio { padding:80px 24px; }
+  .studio-inner { grid-template-columns:1fr; gap:48px; }
+  .studio-right { grid-template-columns:1fr 1fr; }
+  .studio-img:first-child { grid-row:auto; aspect-ratio:3/4; }
+  .quote-section { padding:80px 24px; }
+  .quote-section::before, .quote-section::after { left:24px; right:24px; }
+}

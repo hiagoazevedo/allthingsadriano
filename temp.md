@@ -108,7 +108,7 @@ Single-page layout, 10 sections:
 |---|---|
 | `allthingsadriano_desktop_v6.png` | Latest desktop sketch (1400px) |
 | `allthingsadriano_mobile_v6.png` | Latest mobile sketch (390px) |
-| `allthingsadriano_v3.html` | Latest production HTML (single file, all CSS + JS inline) |
+| `allthingsadriano_v3.html` | Previous production HTML (single file, all CSS + JS inline) |
 
 ### Logo Assets
 The client provided a logo (black bg, gold monogram + text). Three versions extracted:
@@ -117,6 +117,166 @@ The client provided a logo (black bg, gold monogram + text). Three versions extr
 - `logo_footer.png` — 200px wide, brightened for dark footer background
 
 To activate in HTML: place logo files in an `assets/` folder and update the `src` attributes in nav and footer. Fallback text renders automatically if the image file is missing.
+
+---
+
+## 5B. Refactoring — Modular Architecture (March 2026)
+
+O projeto foi refatorado de um único arquivo `index.html` (775 linhas, com CSS e JS embutidos) para uma estrutura modular seguindo o princípio DRY (Don't Repeat Yourself).
+
+### Estrutura final de arquivos
+
+```
+allthingsadriano/
+  index.html
+  css/
+    styles.css        — reset global, variáveis CSS, section-label/h2, keyframes, reveal
+    components.css    — utilitários compartilhados (hub DRY)
+    header.css        — nav, hamburger, mobile menu
+    hero.css
+    ticker.css
+    about.css
+    services-hair.css
+    services-skin.css
+    studio.css        — studio + quote section
+    testimonials.css
+    booking.css
+    footer.css
+  js/
+    utils.js          — helpers: $(), $$(), on(), lockBody()
+    script.js         — lógica principal: cursor, navbar, reveal, scroll, mobile menu
+```
+
+---
+
+### CSS — Duplicações removidas
+
+#### 1. `.card-hover-line` → `components.css`
+A animação `::before` (linha que revela no hover) era **idêntica em 3 lugares**:
+- `.svc-card-dark::before`
+- `.svc-card-light::before`
+- `.review-card::before`
+
+**Antes** (repetido 3×):
+```css
+.svc-card-dark::before {
+  content:''; position:absolute; top:0; left:0;
+  width:100%; height:2px; background:var(--gold);
+  transform:scaleX(0); transform-origin:left; transition:transform 0.4s;
+}
+.svc-card-dark:hover::before { transform:scaleX(1); }
+```
+
+**Depois** — geometria e transição centralizadas:
+```css
+/* components.css */
+.card-hover-line { position:relative; overflow:hidden; }
+.card-hover-line::before {
+  content:''; position:absolute; top:0; left:0;
+  width:100%; height:2px; transform:scaleX(0);
+  transform-origin:left; transition:transform 0.4s;
+}
+.card-hover-line:hover::before { transform:scaleX(1); }
+```
+Cada arquivo de seção define apenas a cor: `.svc-card-dark::before { background:var(--gold); }`.
+No HTML: `class="svc-card-dark card-hover-line"`.
+
+---
+
+#### 2. `.section-pad` → `components.css`
+`padding:140px 64px` estava **repetido em 6 seções** (.about, .services-hair, .services-skin, .studio, .testimonials, .booking).
+
+**Depois:**
+```css
+.section-pad { padding:140px 64px; }
+/* responsive em styles.css */
+@media (max-width:960px) { .section-pad { padding:80px 24px; } }
+```
+No HTML: `class="about section-pad"`, `class="studio section-pad"` etc.
+
+---
+
+#### 3. `.grid-3` → `components.css`
+`display:grid; grid-template-columns:repeat(3,1fr); gap:2px` estava **duplicado** em `.svc-grid` e `.reviews-grid`.
+
+**Depois:**
+```css
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+@media (max-width:960px) { .grid-3 { grid-template-columns:1fr; } }
+```
+No HTML: `class="svc-grid grid-3"`, `class="reviews-grid grid-3"`.
+
+---
+
+#### 4. `.btn-primary` → `components.css`
+O botão principal estava definido dentro do bloco do hero. Movido para `components.css` como componente canônico. `.nav-book` e `.mob-book` mantêm apenas seus overrides de tamanho/padding.
+
+---
+
+#### 5. `.svc-header` base → `components.css`
+A estrutura flex do header das seções de serviços (display, justify-content, margin-bottom, padding-bottom) era compartilhada entre dark e light. Centralizada em `components.css`; overrides de cor ficam em `services-hair.css` e `services-skin.css`.
+
+---
+
+#### 6. `.img-caption` → `components.css`
+Texto de placeholder de imagem (`font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--stone)`) aparecia como seletor descendente em 3 seções diferentes (`.hero-img-placeholder p`, `.about-img-content p`, `.studio-img p`).
+
+**Depois:** classe utilitária aplicada diretamente no HTML: `<p class="img-caption">Studio photography</p>`.
+
+---
+
+#### 7. `.body-text` → `components.css`
+```css
+.body-text { font-size:0.82rem; line-height:1.85; color:var(--ink-muted); }
+```
+Utilitário disponível para textos de corpo em fundo claro.
+
+---
+
+#### 8. Inline styles removidos
+`.section-label` e `.section-h2` na seção de skin tinham `style="color:..."` inline.
+Movidos para `.svc-header.light .section-label` e `.svc-header.light .section-h2` em `services-skin.css`.
+
+---
+
+#### 9. `.vagaro-cta-btn` eliminado
+Era apenas `display:inline-block` — redundante com `.btn-primary`. Removido do HTML e CSS.
+
+---
+
+#### 10. Media queries distribuídas
+O bloco `@media (max-width:960px)` único (30+ regras) foi **dividido entre cada arquivo de seção**, co-localizando os breakpoints com os componentes que afetam.
+
+---
+
+### JavaScript — Duplicações removidas
+
+Extraídas para `js/utils.js`:
+
+| Helper | Resolve |
+|---|---|
+| `$(sel)` | Substitui `document.querySelector(sel)` — 5+ chamadas |
+| `$$(sel)` | Substitui `document.querySelectorAll(sel)` — 4 chamadas |
+| `on(el, ev, fn)` | Substitui `el.addEventListener(ev, fn)` — 8+ chamadas |
+| `lockBody(bool)` | Substitui 2 atribuições diretas: `document.body.style.overflow = open ? 'hidden' : ''` |
+
+`toggleMobile()` e `closeMobile()` permanecem em escopo global em `script.js` (necessário: HTML usa `onclick="toggleMobile()"`).
+
+---
+
+### Resumo quantitativo
+
+| Tipo | Antes | Depois |
+|---|---|---|
+| Arquivos | 1 (`index.html` monolítico) | 15 arquivos (1 HTML + 12 CSS + 2 JS) |
+| Linhas de CSS embutido | 271 | 0 (distribuídas em arquivos próprios) |
+| Linhas de JS embutido | 50 | 0 (distribuídas em `utils.js` + `script.js`) |
+| Blocos `::before` duplicados | 3 | 1 (`.card-hover-line`) |
+| `padding:140px 64px` duplicados | 6 | 1 (`.section-pad`) |
+| Definições de grid 3-col | 2 | 1 (`.grid-3`) |
+| Instâncias de `querySelector` no JS | 9+ | 0 (substituídas por `$`/`$$`) |
+| Instâncias de `addEventListener` no JS | 8+ | 0 (substituídas por `on()`) |
+| Atribuições de `overflow` no body | 2 | 1 (`lockBody()`) |
 
 ---
 

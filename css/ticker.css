@@ -1,0 +1,8 @@
+/* ══════════════════════════════════════════
+   ticker.css — Scrolling ticker strip
+   ══════════════════════════════════════════ */
+
+.ticker { background:var(--ink); padding:14px 0; overflow:hidden; white-space:nowrap; }
+.ticker-inner { display:inline-flex; animation:ticker 30s linear infinite; }
+.ticker-item { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone); padding:0 48px; }
+.ticker-item span { color:var(--gold); margin-right:12px; }
