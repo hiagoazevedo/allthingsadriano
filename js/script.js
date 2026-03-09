@@ -57,3 +57,65 @@ function closeMobile() {
   $('#hamburger').classList.remove('open');
   lockBody(false);
 }
+
+// ── PORTFOLIO LIGHTBOX ──
+(function () {
+  const lightbox  = $('#lightbox');
+  const lbCounter = $('#lbCounter');
+  const lbClose   = $('#lbClose');
+  const lbPrev    = $('#lbPrev');
+  const lbNext    = $('#lbNext');
+  const items     = $$('.portfolio-item');
+  const total     = items.length;
+  let current     = 0;
+
+  function openLightbox(index) {
+    current = index;
+    updateLightbox();
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    lockBody(true);
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lockBody(false);
+  }
+
+  function updateLightbox() {
+    lbCounter.textContent = `${current + 1} / ${total}`;
+    // When real images are added: update lbImg background-image or src here
+  }
+
+  function navigate(dir) {
+    const wrap = lightbox.querySelector('.lightbox-img-wrap');
+    wrap.classList.add('transitioning');
+    setTimeout(() => {
+      current = (current + dir + total) % total;
+      updateLightbox();
+      wrap.classList.remove('transitioning');
+    }, 200);
+  }
+
+  // Open on item click
+  items.forEach((item, i) => {
+    on(item.querySelector('.portfolio-img-placeholder'), 'click', () => openLightbox(i));
+  });
+
+  // Controls
+  on(lbClose, 'click', closeLightbox);
+  on(lbPrev,  'click', () => navigate(-1));
+  on(lbNext,  'click', () => navigate(1));
+
+  // Close on overlay click (outside image)
+  on(lightbox, 'click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+  // Keyboard navigation
+  on(document, 'keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowRight') navigate(1);
+    if (e.key === 'ArrowLeft')  navigate(-1);
+  });
+})();

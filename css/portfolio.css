@@ -1,0 +1,154 @@
+/* ── PORTFOLIO SECTION ── */
+.portfolio {
+  background: var(--warm-white);
+}
+
+.portfolio-header {
+  margin-bottom: 64px;
+}
+
+/* 3-column CSS Grid base */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Large item: spans 2 columns */
+.portfolio-item.p-large {
+  grid-column: span 2;
+}
+
+/* Small item: 1 column */
+.portfolio-item.p-small {
+  grid-column: span 1;
+}
+
+/* Image placeholder (replaced by <img> later) */
+.portfolio-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--beige);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: opacity 0.4s ease;
+}
+
+.portfolio-item.p-large .portfolio-img-placeholder {
+  aspect-ratio: 16/9;
+}
+
+/* Hover: subtle dim */
+.portfolio-img-placeholder:hover {
+  opacity: 0.88;
+}
+
+/* Category label: appears on hover */
+.portfolio-label {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--warm-white);
+  padding: 4px 10px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.portfolio-img-placeholder:hover .portfolio-label {
+  opacity: 1;
+  transform: none;
+}
+
+/* Responsive: 2-column uniform grid on mobile */
+@media (max-width: 960px) {
+  .portfolio-header { margin-bottom: 40px; }
+  .portfolio-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .portfolio-item.p-large,
+  .portfolio-item.p-small { grid-column: span 1; }
+  .portfolio-img-placeholder,
+  .portfolio-item.p-large .portfolio-img-placeholder { aspect-ratio: 1/1; }
+}
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(28, 25, 23, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, background 0.4s ease;
+}
+
+.lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+  background: rgba(28, 25, 23, 0.92);
+}
+
+.lightbox-img-wrap {
+  width: min(80vw, 900px);
+  aspect-ratio: 4/3;
+  background: var(--beige);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+/* Slide/fade animation between images */
+.lightbox-img-wrap.transitioning {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+/* Nav & close buttons */
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  background: none;
+  border: none;
+  color: var(--stone);
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 12px;
+  transition: color 0.25s ease;
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover { color: var(--warm-white); }
+
+.lightbox-close { top: 32px; right: 40px; font-size: 0.9rem; letter-spacing: 0.05em; }
+.lightbox-prev  { left: 40px; font-size: 1.4rem; }
+.lightbox-next  { right: 40px; font-size: 1.4rem; }
+
+/* Counter */
+.lightbox-counter {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+@media (max-width: 960px) {
+  .lightbox-img-wrap { width: 92vw; }
+  .lightbox-prev { left: 16px; }
+  .lightbox-next { right: 16px; }
+  .lightbox-close { top: 20px; right: 20px; }
+}

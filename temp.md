@@ -66,8 +66,9 @@ Single-page layout, 10 sections:
 | 06 | The Studio | `#studio` | Left text + 3-image right grid |
 | 07 | Quote | — | Full-width pull quote, centered |
 | 08 | Google Reviews | `#reviews` | 3 cards, dark bg (see §6) |
-| 09 | Booking | `#booking` | Left meta + right Vagaro widget |
-| 10 | Footer | — | 3-col: brand, navigate, connect |
+| 09 | Portfolio | `#portfolio` | Masonry editorial grid + lightbox (see §5C) |
+| 10 | Booking | `#booking` | Left meta + right Vagaro widget |
+| 11 | Footer | — | 3-col: brand, navigate, connect |
 
 ---
 
@@ -277,6 +278,100 @@ Extraídas para `js/utils.js`:
 | Instâncias de `querySelector` no JS | 9+ | 0 (substituídas por `$`/`$$`) |
 | Instâncias de `addEventListener` no JS | 8+ | 0 (substituídas por `on()`) |
 | Atribuições de `overflow` no body | 2 | 1 (`lockBody()`) |
+
+---
+
+## 5C. Portfolio Section — Implementation (March 2026)
+
+Seção `#portfolio` adicionada entre `#reviews` e `#booking`. 12 imagens placeholder em grid masonry editorial + lightbox vanilla JS com navegação completa.
+
+### Arquivos criados/modificados
+
+| Arquivo | Mudança |
+|---|---|
+| `index.html` | Nav desktop, mobile menu, footer, `<section #portfolio>`, overlay `.lightbox`, `<link>` para `portfolio.css` |
+| `css/portfolio.css` | Estilos do grid + lightbox (novo arquivo) |
+| `js/script.js` | IIFE do lightbox appended ao final |
+
+---
+
+### Grid Masonry Editorial — `css/portfolio.css`
+
+**Estrutura:** CSS Grid de 3 colunas. Itens `.p-large` ocupam 2 colunas, `.p-small` ocupa 1.
+
+```
+Desktop (3 colunas, gap 12px):
+Row 1: [── large (2col) ──] [small]
+Row 2: [── large (2col) ──] [small]
+Row 3: [small] [small] [small]
+Row 4: [small] [── large (2col) ──]
+Row 5: [── large (2col) ──] [small]
+Row 6: [small]  ← índice 11
+```
+
+**Responsive (≤960px):** grid colapsa para 2 colunas uniformes, todos os itens `span 1`, aspect-ratio `1/1` (quadrado).
+
+**Tokens de design usados:**
+| Propriedade | Token |
+|---|---|
+| Background da seção | `var(--warm-white)` |
+| Background dos placeholders | `var(--beige)` |
+| Cor do label da categoria | `var(--ink)` |
+| Background do label | `var(--warm-white)` |
+
+**Aspect ratios dos placeholders:**
+- `.p-small` → `4/3`
+- `.p-large` → `16/9`
+- Mobile (todos) → `1/1`
+
+**Label hover animation (`.portfolio-label`):**
+- Opacity `0 → 1` + `translateY(6px) → none`
+- Transition `0.3s ease`
+- Posição: `bottom: 16px; left: 16px`
+
+**Para ajustar o grid:** editar `grid-template-columns` e `gap` em `.portfolio-grid`. Para mudar o padrão de linhas, alterar as classes `p-large`/`p-small` nos `data-index` correspondentes em `index.html`.
+
+---
+
+### Lightbox — `css/portfolio.css` + `js/script.js`
+
+**HTML:** overlay `#lightbox` inserido antes de `</body>`, fora do `<footer>`.
+
+**Estado fechado:** `opacity:0; pointer-events:none` — invisível e não interativo.
+**Estado aberto (`.open`):** `opacity:1; pointer-events:all; background:rgba(28,25,23,0.92)`.
+
+**Tokens de design usados:**
+| Elemento | Token |
+|---|---|
+| Fundo do overlay | `rgba(--ink, 0.92)` = `rgba(28,25,23,0.92)` |
+| Background da área da imagem | `var(--beige)` |
+| Cor dos botões (default) | `var(--stone)` |
+| Cor dos botões (hover) | `var(--warm-white)` |
+| Cor do counter | `var(--stone)` |
+
+**Tamanho da área de imagem:** `width: min(80vw, 900px); aspect-ratio: 4/3`. Mobile: `92vw`.
+
+**Transição entre imagens:** `.lightbox-img-wrap.transitioning { opacity:0; transform:scale(0.97) }` — 200ms delay antes de trocar o índice.
+
+**Posição dos botões (desktop):**
+- Close (✕): `top:32px; right:40px`
+- Prev (←): `left:40px`
+- Next (→): `right:40px`
+- Counter: `bottom:32px; left:50%` (centrado)
+
+**Lógica JS (IIFE em `script.js`):**
+- `openLightbox(i)` → seta `current`, chama `updateLightbox()`, adiciona `.open`, `lockBody(true)`
+- `closeLightbox()` → remove `.open`, `lockBody(false)`
+- `navigate(dir)` → adiciona `.transitioning`, aguarda 200ms, recalcula `current = (current + dir + total) % total`, remove `.transitioning`
+- Eventos: click nos `.portfolio-img-placeholder`, click em `#lbClose`/`#lbPrev`/`#lbNext`, click no overlay (apenas se `e.target === lightbox`), `keydown` (Escape, ArrowRight, ArrowLeft)
+
+**Para adicionar imagens reais:** substituir `<div class="portfolio-img-placeholder">` por `<img class="portfolio-img" src="assets/portfolio/image-01.jpg">` e adicionar em `portfolio.css`:
+```css
+.portfolio-item img.portfolio-img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+```
+Atualizar também `updateLightbox()` em `script.js` para trocar `src` ou `background-image` conforme o índice `current`.
 
 ---
 

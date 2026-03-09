@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/services-skin.css"/>
   <link rel="stylesheet" href="css/studio.css"/>
   <link rel="stylesheet" href="css/testimonials.css"/>
+  <link rel="stylesheet" href="css/portfolio.css"/>
   <link rel="stylesheet" href="css/booking.css"/>
   <link rel="stylesheet" href="css/footer.css"/>
 </head>
@@ -33,6 +34,7 @@
     <a href="#services-hair" onclick="closeMobile()">Hair</a>
     <a href="#services-skin" onclick="closeMobile()">Skin</a>
     <a href="#studio"        onclick="closeMobile()">The Studio</a>
+    <a href="#portfolio"     onclick="closeMobile()">Portfolio</a>
     <a href="#booking" class="mob-book" onclick="closeMobile()">Schedule</a>
   </div>
 
@@ -56,6 +58,7 @@
       <li><a href="#services-hair">Hair</a></li>
       <li><a href="#services-skin">Skin</a></li>
       <li><a href="#studio">The Studio</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#booking" class="nav-book">Schedule</a></li>
     </ul>
     <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menu">
@@ -353,6 +356,37 @@
     </div>
   </section>
 
+  <!-- ── PORTFOLIO ── -->
+  <section class="portfolio section-pad" id="portfolio">
+    <div class="portfolio-header">
+      <p class="section-label reveal">Portfolio</p>
+      <h2 class="section-h2 reveal reveal-delay-1">
+        The work,<br><em>up close.</em>
+      </h2>
+    </div>
+
+    <div class="portfolio-grid reveal reveal-delay-2">
+      <!-- Row 1: large | small -->
+      <div class="portfolio-item p-large" data-index="0"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
+      <div class="portfolio-item p-small" data-index="1"><div class="portfolio-img-placeholder"><span class="portfolio-label">Skin</span></div></div>
+      <!-- Row 2: large | small -->
+      <div class="portfolio-item p-large" data-index="2"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
+      <div class="portfolio-item p-small" data-index="3"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
+      <!-- Row 3: small | small | small -->
+      <div class="portfolio-item p-small" data-index="4"><div class="portfolio-img-placeholder"><span class="portfolio-label">Skin</span></div></div>
+      <div class="portfolio-item p-small" data-index="5"><div class="portfolio-img-placeholder"><span class="portfolio-label">Skin</span></div></div>
+      <div class="portfolio-item p-small" data-index="6"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
+      <!-- Row 4: small | large -->
+      <div class="portfolio-item p-small" data-index="7"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
+      <div class="portfolio-item p-large" data-index="8"><div class="portfolio-img-placeholder"><span class="portfolio-label">Skin</span></div></div>
+      <!-- Row 5: large | small -->
+      <div class="portfolio-item p-large" data-index="9"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
+      <div class="portfolio-item p-small" data-index="10"><div class="portfolio-img-placeholder"><span class="portfolio-label">Skin</span></div></div>
+      <!-- Row 6 start: small | small (pattern continues) -->
+      <div class="portfolio-item p-small" data-index="11"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
+    </div>
+  </section>
+
   <!-- ── BOOKING ── -->
   <section class="booking section-pad" id="booking">
     <div class="booking-left">
@@ -450,6 +484,7 @@
       <a href="#services-hair">Hair Services</a>
       <a href="#services-skin">Skin Services</a>
       <a href="#studio">The Studio</a>
+      <a href="#portfolio">Portfolio</a>
       <a href="#booking">Schedule</a>
     </div>
     <div class="footer-col">
@@ -462,6 +497,16 @@
   <div class="footer-bottom">
     <p>© 2025 All Things Adriano · All rights reserved</p>
     <p>Chicago, IL · Private Studio</p>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lightbox-prev" id="lbPrev" aria-label="Previous">←</button>
+    <button class="lightbox-next" id="lbNext" aria-label="Next">→</button>
+    <div class="lightbox-img-wrap">
+      <div class="lightbox-img-placeholder" id="lbImg"></div>
+    </div>
+    <div class="lightbox-counter" id="lbCounter">1 / 12</div>
   </div>
 
   <script src="js/utils.js"></script>
