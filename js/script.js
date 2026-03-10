@@ -79,13 +79,18 @@ function closeMobile() {
 
   function closeLightbox() {
     lightbox.classList.remove('open');
+    if (lightbox.contains(document.activeElement)) document.activeElement.blur();
     lightbox.setAttribute('aria-hidden', 'true');
     lockBody(false);
   }
 
   function updateLightbox() {
     lbCounter.textContent = `${current + 1} / ${total}`;
-    // When real images are added: update lbImg background-image or src here
+    const source = items[current].querySelector('img');
+    const lbImg  = $('#lbImg');
+    lbImg.src    = source.src;
+    lbImg.srcset = source.srcset;
+    lbImg.alt    = source.alt;
   }
 
   function navigate(dir) {
@@ -100,7 +105,7 @@ function closeMobile() {
 
   // Open on item click
   items.forEach((item, i) => {
-    on(item.querySelector('.portfolio-img-placeholder'), 'click', () => openLightbox(i));
+    on(item.querySelector('.portfolio-img'), 'click', () => openLightbox(i));
   });
 
   // Controls

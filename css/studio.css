@@ -15,6 +15,7 @@
 .pillar-text p { font-size:0.8rem; color:var(--ink-faint); line-height:1.65; }
 .studio-right { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:12px; }
 .studio-img { background:var(--beige); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.studio-img picture { display:block; width:100%; height:100%; }
 .studio-img:first-child { grid-row:span 2; aspect-ratio:unset; }
 
 /* ── QUOTE ── */

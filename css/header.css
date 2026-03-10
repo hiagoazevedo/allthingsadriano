@@ -9,19 +9,28 @@ nav.compact { padding:14px 64px; background:rgba(247,245,240,0.96); backdrop-fil
 .nav-logo-fallback { font-family:'Playfair Display',serif; font-size:1rem; font-weight:400; letter-spacing:0.06em; color:var(--ink); text-decoration:none; }
 .nav-logo-fallback em { font-style:italic; color:var(--gold); }
 .nav-links { display:flex; list-style:none; gap:40px; align-items:center; }
-.nav-links a { text-decoration:none; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-muted); font-weight:400; transition:color 0.3s; position:relative; }
+
+/* Default transparent state — light text for readability over video background */
+.nav-links a { text-decoration:none; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.78); font-weight:400; transition:color 0.3s; position:relative; }
 .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--gold); transition:width 0.3s; }
-.nav-links a:hover { color:var(--ink); }
+.nav-links a:hover { color:#fff; }
 .nav-links a:hover::after { width:100%; }
 
-/* .nav-book uses .btn-primary base + overrides for compact nav size */
-.nav-book { font-size:0.65rem !important; letter-spacing:0.25em !important; color:var(--ink) !important; border:1px solid var(--stone) !important; padding:10px 22px !important; transition:background 0.3s, border-color 0.3s, color 0.3s !important; }
+/* .nav-book — transparent state */
+.nav-book { font-size:0.65rem !important; letter-spacing:0.25em !important; color:rgba(255,255,255,0.85) !important; border:1px solid rgba(255,255,255,0.35) !important; padding:10px 22px !important; transition:background 0.3s, border-color 0.3s, color 0.3s !important; }
 .nav-book::after { display:none !important; }
-.nav-book:hover { background:var(--ink) !important; border-color:var(--ink) !important; color:var(--warm-white) !important; }
+.nav-book:hover { background:rgba(255,255,255,0.15) !important; border-color:rgba(255,255,255,0.6) !important; color:#fff !important; }
+
+/* Compact state — revert to dark ink colors */
+nav.compact .nav-links a { color:var(--ink-muted); }
+nav.compact .nav-links a:hover { color:var(--ink); }
+nav.compact .nav-book { color:var(--ink) !important; border-color:var(--stone) !important; }
+nav.compact .nav-book:hover { background:var(--ink) !important; border-color:var(--ink) !important; color:var(--warm-white) !important; }
+nav.compact .hamburger span { background:var(--ink); }
 
 /* ── HAMBURGER ── */
 .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
-.hamburger span { display:block; width:24px; height:1px; background:var(--ink); transition:transform 0.3s, opacity 0.3s; }
+.hamburger span { display:block; width:24px; height:1px; background:rgba(255,255,255,0.85); transition:transform 0.3s, opacity 0.3s, background 0.5s; }
 .hamburger.open span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity:0; }
 .hamburger.open span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
@@ -40,4 +49,5 @@ nav.compact { padding:14px 64px; background:rgba(247,245,240,0.96); backdrop-fil
   .nav-logo img { height:32px; }
   .nav-links { display:none; }
   .hamburger { display:flex; }
+  .mobile-menu a { font-size:1.5rem; }
 }

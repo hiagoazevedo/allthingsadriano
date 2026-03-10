@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════
-   styles.css — Global foundation
-   Reset · Variables · Typography · Keyframes · Reveal
-   ══════════════════════════════════════════ */
+  styles.css — Global foundation
+  Reset · Variables · Typography · Keyframes · Reveal
+  ══════════════════════════════════════════ */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 

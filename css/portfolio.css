@@ -26,7 +26,7 @@
 
 .portfolio-img {
   width: 100%;
-  aspect-ratio: 4/3;
+  height: 100%;
   background: var(--beige);
   position: relative;
   overflow: hidden;
@@ -66,14 +66,17 @@
   transform: none;
 }
 
-/* Responsive: 2-column uniform grid on mobile */
+/* Responsive: 6-column grid — p-large=4/6 (2/3), p-small=2/6 (1/3) */
 @media (max-width: 960px) {
+  .portfolio { padding: 80px 24px;}
   .portfolio-header { margin-bottom: 40px; }
-  .portfolio-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .portfolio-item.p-large,
-  .portfolio-item.p-small { grid-column: span 1; }
-  .portfolio-img,
-  .portfolio-item.p-large .portfolio-img-placeholder { aspect-ratio: 1/1; }
+  .portfolio-grid { grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .portfolio-item.p-large { grid-column: span 4; }
+  .portfolio-item.p-small { grid-column: span 2; }
+  /* 3/4 for smalls, 3/2 for large — heights match when paired in the same row */
+  .portfolio-img { aspect-ratio: 3/4;}
+  .portfolio-item.p-large .portfolio-img { aspect-ratio: 3/2; }
+  .portfolio-img picture { display: block; width: 100%; height: 100%; }
 }
 
 /* ── LIGHTBOX ── */
