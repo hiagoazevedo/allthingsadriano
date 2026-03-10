@@ -24,8 +24,7 @@
   grid-column: span 1;
 }
 
-/* Image placeholder (replaced by <img> later) */
-.portfolio-img-placeholder {
+.portfolio-img {
   width: 100%;
   aspect-ratio: 4/3;
   background: var(--beige);
@@ -35,12 +34,12 @@
   transition: opacity 0.4s ease;
 }
 
-.portfolio-item.p-large .portfolio-img-placeholder {
+.portfolio-item.p-large .portfolio-img {
   aspect-ratio: 16/9;
 }
 
 /* Hover: subtle dim */
-.portfolio-img-placeholder:hover {
+.portfolio-img:hover {
   opacity: 0.88;
 }
 
@@ -62,7 +61,7 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.portfolio-img-placeholder:hover .portfolio-label {
+.portfolio-img:hover .portfolio-label {
   opacity: 1;
   transform: none;
 }
@@ -73,7 +72,7 @@
   .portfolio-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
   .portfolio-item.p-large,
   .portfolio-item.p-small { grid-column: span 1; }
-  .portfolio-img-placeholder,
+  .portfolio-img,
   .portfolio-item.p-large .portfolio-img-placeholder { aspect-ratio: 1/1; }
 }
 

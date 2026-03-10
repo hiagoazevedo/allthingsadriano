@@ -15,8 +15,6 @@
 .hero-location span { font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--ink-faint); }
 .hero-right { background:var(--beige); position:relative; overflow:hidden; }
 .hero-right::before { content:''; position:absolute; inset:0; background:linear-gradient(160deg, transparent 60%, rgba(168,144,106,0.08) 100%); }
-.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; }
-.hero-img-placeholder .img-caption { letter-spacing:0.3em; }
 .hero-detail-card { position:absolute; bottom:60px; right:-1px; background:var(--warm-white); padding:28px 36px; border-left:3px solid var(--gold); opacity:0; animation:revealLeft 1s 1.2s cubic-bezier(0.16,1,0.3,1) forwards; }
 .hero-detail-label { font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
 .hero-detail-val { font-family:'Playfair Display',serif; font-size:1rem; font-weight:400; }

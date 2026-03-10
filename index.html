@@ -41,17 +41,7 @@
   <!-- ── NAV ── -->
   <nav id="navbar">
     <a href="#home" class="nav-logo">
-      <!--
-        TO ACTIVATE LOGO: Replace the src below with the real logo path.
-        Use the transparent PNG version (logo_transparent.png).
-        For dark nav variant, use logo_footer.png (brightened version).
-        Example: <img src="assets/logo.png" alt="All Things Adriano" />
-      -->
-      <img src="assets/logo.png" alt="All Things Adriano"
-           onerror="this.style.display='none';document.getElementById('nav-logo-text').style.display='inline'"/>
-      <span id="nav-logo-text" style="display:none;font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;letter-spacing:0.06em;color:var(--ink);">
-        All Things <em style="font-style:italic;color:var(--gold);">Adriano</em>
-      </span>
+      <img src="assets/logo/allthings-logo-gold.png" alt="All Things Adriano"/>
     </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
@@ -88,7 +78,10 @@
       <div class="hero-location"><span>Chicago, Illinois</span></div>
     </div>
     <div class="hero-right">
-      <div class="hero-img-placeholder"><p class="img-caption">Studio photography</p></div>
+      <video autoplay muted loop playsinline poster="assets/video/hero-poster.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        <source src="assets/video/hero.webm" type="video/webm">
+        <source src="assets/video/hero.mp4" type="video/mp4">
+      </video>
       <div class="hero-detail-card">
         <div class="hero-detail-label">By appointment only</div>
         <div class="hero-detail-val">Private · 1:1 · Focused</div>
@@ -121,7 +114,21 @@
     <div class="about-left reveal">
       <div class="about-img-frame">
         <div class="about-img-label">Adriano · Chicago</div>
-        <div class="about-img-content"><p class="img-caption">Portrait photography</p></div>
+        <picture>
+          <source type="image/webp"
+            srcset="assets/images/webp/about-480.webp 480w,
+                    assets/images/webp/about-800.webp 800w,
+                    assets/images/webp/about-1100.webp 1100w"
+            sizes="(max-width:960px) 100vw, 45vw">
+          <img src="assets/images/fallback/about-1100.jpg"
+            srcset="assets/images/fallback/about-480.jpg 480w,
+                    assets/images/fallback/about-800.jpg 800w,
+                    assets/images/fallback/about-1100.jpg 1100w"
+            sizes="(max-width:960px) 100vw, 45vw"
+            alt="Adriano · Chicago"
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover;display:block;">
+        </picture>
       </div>
     </div>
     <div class="about-right">
@@ -279,9 +286,57 @@
         </div>
       </div>
       <div class="studio-right reveal reveal-delay-2">
-        <div class="studio-img"><p class="img-caption">Studio image</p></div>
-        <div class="studio-img"><p class="img-caption">Detail image</p></div>
-        <div class="studio-img"><p class="img-caption">Texture image</p></div>
+        <div class="studio-img">
+          <picture>
+            <source type="image/webp"
+              srcset="assets/images/webp/studio-1-480.webp 480w,
+                      assets/images/webp/studio-1-700.webp 700w,
+                      assets/images/webp/studio-1-900.webp 900w"
+              sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/studio-1-900.jpg"
+              srcset="assets/images/fallback/studio-1-480.jpg 480w,
+                      assets/images/fallback/studio-1-700.jpg 700w,
+                      assets/images/fallback/studio-1-900.jpg 900w"
+              sizes="(max-width:960px) 50vw, 33vw"
+              alt="The Studio"
+              loading="lazy"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+        </div>
+        <div class="studio-img">
+          <picture>
+            <source type="image/webp"
+              srcset="assets/images/webp/studio-3-480.webp 480w,
+                      assets/images/webp/studio-3-700.webp 700w,
+                      assets/images/webp/studio-3-900.webp 900w"
+              sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/studio-3-900.jpg"
+              srcset="assets/images/fallback/studio-3-480.jpg 480w,
+                      assets/images/fallback/studio-3-700.jpg 700w,
+                      assets/images/fallback/studio-3-900.jpg 900w"
+              sizes="(max-width:960px) 50vw, 33vw"
+              alt="The Studio"
+              loading="lazy"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+        </div>
+        <div class="studio-img">
+          <picture>
+            <source type="image/webp"
+              srcset="assets/images/webp/studio-4-480.webp 480w,
+                      assets/images/webp/studio-4-700.webp 700w,
+                      assets/images/webp/studio-4-900.webp 900w"
+              sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/studio-4-900.jpg"
+              srcset="assets/images/fallback/studio-4-480.jpg 480w,
+                      assets/images/fallback/studio-4-700.jpg 700w,
+                      assets/images/fallback/studio-4-900.jpg 900w"
+              sizes="(max-width:960px) 50vw, 33vw"
+              alt="The Studio"
+              loading="lazy"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+        </div>
       </div>
     </div>
   </section>
@@ -367,23 +422,119 @@
 
     <div class="portfolio-grid reveal reveal-delay-2">
       <!-- Row 1: large | small -->
-      <div class="portfolio-item p-large" data-index="0"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
-      <div class="portfolio-item p-small" data-index="1"><div class="portfolio-img-placeholder"><span class="portfolio-label">Skin</span></div></div>
+      <div class="portfolio-item p-large" data-index="0">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-hair1-480.webp 480w, assets/images/webp/portfolio-hair1-960.webp 960w, assets/images/webp/portfolio-hair1-1440.webp 1440w" sizes="(max-width:960px) 50vw, 66vw">
+            <img src="assets/images/fallback/portfolio-hair1-1440.jpg" srcset="assets/images/fallback/portfolio-hair1-480.jpg 480w, assets/images/fallback/portfolio-hair1-960.jpg 960w, assets/images/fallback/portfolio-hair1-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 66vw" alt="Hair" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Hair</span>
+        </div>
+      </div>
+      <div class="portfolio-item p-small" data-index="1">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-skin1-480.webp 480w, assets/images/webp/portfolio-skin1-960.webp 960w, assets/images/webp/portfolio-skin1-1440.webp 1440w" sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/portfolio-skin1-1440.jpg" srcset="assets/images/fallback/portfolio-skin1-480.jpg 480w, assets/images/fallback/portfolio-skin1-960.jpg 960w, assets/images/fallback/portfolio-skin1-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 33vw" alt="Skin" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Skin</span>
+        </div>
+      </div>
       <!-- Row 2: large | small -->
-      <div class="portfolio-item p-large" data-index="2"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
-      <div class="portfolio-item p-small" data-index="3"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
+      <div class="portfolio-item p-large" data-index="2">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-hair2-480.webp 480w, assets/images/webp/portfolio-hair2-960.webp 960w, assets/images/webp/portfolio-hair2-1440.webp 1440w" sizes="(max-width:960px) 50vw, 66vw">
+            <img src="assets/images/fallback/portfolio-hair2-1440.jpg" srcset="assets/images/fallback/portfolio-hair2-480.jpg 480w, assets/images/fallback/portfolio-hair2-960.jpg 960w, assets/images/fallback/portfolio-hair2-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 66vw" alt="Hair" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Hair</span>
+        </div>
+      </div>
+      <div class="portfolio-item p-small" data-index="3">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-hair3-480.webp 480w, assets/images/webp/portfolio-hair3-960.webp 960w, assets/images/webp/portfolio-hair3-1440.webp 1440w" sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/portfolio-hair3-1440.jpg" srcset="assets/images/fallback/portfolio-hair3-480.jpg 480w, assets/images/fallback/portfolio-hair3-960.jpg 960w, assets/images/fallback/portfolio-hair3-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 33vw" alt="Hair" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Hair</span>
+        </div>
+      </div>
       <!-- Row 3: small | small | small -->
-      <div class="portfolio-item p-small" data-index="4"><div class="portfolio-img-placeholder"><span class="portfolio-label">Skin</span></div></div>
-      <div class="portfolio-item p-small" data-index="5"><div class="portfolio-img-placeholder"><span class="portfolio-label">Skin</span></div></div>
-      <div class="portfolio-item p-small" data-index="6"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
+      <div class="portfolio-item p-small" data-index="4">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-skin2-480.webp 480w, assets/images/webp/portfolio-skin2-960.webp 960w, assets/images/webp/portfolio-skin2-1440.webp 1440w" sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/portfolio-skin2-1440.jpg" srcset="assets/images/fallback/portfolio-skin2-480.jpg 480w, assets/images/fallback/portfolio-skin2-960.jpg 960w, assets/images/fallback/portfolio-skin2-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 33vw" alt="Skin" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Skin</span>
+        </div>
+      </div>
+      <div class="portfolio-item p-small" data-index="5">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-skin3-480.webp 480w, assets/images/webp/portfolio-skin3-960.webp 960w, assets/images/webp/portfolio-skin3-1440.webp 1440w" sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/portfolio-skin3-1440.jpg" srcset="assets/images/fallback/portfolio-skin3-480.jpg 480w, assets/images/fallback/portfolio-skin3-960.jpg 960w, assets/images/fallback/portfolio-skin3-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 33vw" alt="Skin" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Skin</span>
+        </div>
+      </div>
+      <div class="portfolio-item p-small" data-index="6">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-hair4-480.webp 480w, assets/images/webp/portfolio-hair4-960.webp 960w, assets/images/webp/portfolio-hair4-1440.webp 1440w" sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/portfolio-hair4-1440.jpg" srcset="assets/images/fallback/portfolio-hair4-480.jpg 480w, assets/images/fallback/portfolio-hair4-960.jpg 960w, assets/images/fallback/portfolio-hair4-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 33vw" alt="Hair" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Hair</span>
+        </div>
+      </div>
       <!-- Row 4: small | large -->
-      <div class="portfolio-item p-small" data-index="7"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
-      <div class="portfolio-item p-large" data-index="8"><div class="portfolio-img-placeholder"><span class="portfolio-label">Skin</span></div></div>
+      <div class="portfolio-item p-small" data-index="7">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-hair5-480.webp 480w, assets/images/webp/portfolio-hair5-960.webp 960w, assets/images/webp/portfolio-hair5-1440.webp 1440w" sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/portfolio-hair5-1440.jpg" srcset="assets/images/fallback/portfolio-hair5-480.jpg 480w, assets/images/fallback/portfolio-hair5-960.jpg 960w, assets/images/fallback/portfolio-hair5-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 33vw" alt="Hair" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Hair</span>
+        </div>
+      </div>
+      <div class="portfolio-item p-large" data-index="8">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-skin4-480.webp 480w, assets/images/webp/portfolio-skin4-960.webp 960w, assets/images/webp/portfolio-skin4-1440.webp 1440w" sizes="(max-width:960px) 50vw, 66vw">
+            <img src="assets/images/fallback/portfolio-skin4-1440.jpg" srcset="assets/images/fallback/portfolio-skin4-480.jpg 480w, assets/images/fallback/portfolio-skin4-960.jpg 960w, assets/images/fallback/portfolio-skin4-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 66vw" alt="Skin" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Skin</span>
+        </div>
+      </div>
       <!-- Row 5: large | small -->
-      <div class="portfolio-item p-large" data-index="9"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
-      <div class="portfolio-item p-small" data-index="10"><div class="portfolio-img-placeholder"><span class="portfolio-label">Skin</span></div></div>
+      <div class="portfolio-item p-large" data-index="9">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-hair6-480.webp 480w, assets/images/webp/portfolio-hair6-960.webp 960w, assets/images/webp/portfolio-hair6-1440.webp 1440w" sizes="(max-width:960px) 50vw, 66vw">
+            <img src="assets/images/fallback/portfolio-hair6-1440.jpg" srcset="assets/images/fallback/portfolio-hair6-480.jpg 480w, assets/images/fallback/portfolio-hair6-960.jpg 960w, assets/images/fallback/portfolio-hair6-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 66vw" alt="Hair" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Hair</span>
+        </div>
+      </div>
+      <div class="portfolio-item p-small" data-index="10">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-skin5-480.webp 480w, assets/images/webp/portfolio-skin5-960.webp 960w, assets/images/webp/portfolio-skin5-1440.webp 1440w" sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/portfolio-skin5-1440.jpg" srcset="assets/images/fallback/portfolio-skin5-480.jpg 480w, assets/images/fallback/portfolio-skin5-960.jpg 960w, assets/images/fallback/portfolio-skin5-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 33vw" alt="Skin" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Skin</span>
+        </div>
+      </div>
       <!-- Row 6 start: small | small (pattern continues) -->
-      <div class="portfolio-item p-small" data-index="11"><div class="portfolio-img-placeholder"><span class="portfolio-label">Hair</span></div></div>
+      <div class="portfolio-item p-small" data-index="11">
+        <div class="portfolio-img">
+          <picture>
+            <source type="image/webp" srcset="assets/images/webp/portfolio-hair7-480.webp 480w, assets/images/webp/portfolio-hair7-960.webp 960w, assets/images/webp/portfolio-hair7-1440.webp 1440w" sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/portfolio-hair7-1440.jpg" srcset="assets/images/fallback/portfolio-hair7-480.jpg 480w, assets/images/fallback/portfolio-hair7-960.jpg 960w, assets/images/fallback/portfolio-hair7-1440.jpg 1440w" sizes="(max-width:960px) 50vw, 33vw" alt="Hair" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+          <span class="portfolio-label">Hair</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -467,15 +618,7 @@
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-brand">
-      <!--
-        FOOTER LOGO: Use the brightened version for dark background.
-        Replace src with: assets/logo-light.png
-      -->
-      <img class="footer-logo" src="assets/logo-light.png" alt="All Things Adriano"
-           onerror="this.style.display='none';document.getElementById('footer-logo-text').style.display='block'"/>
-      <span id="footer-logo-text" style="display:none;font-family:'Playfair Display',serif;font-size:1rem;color:var(--warm-white);letter-spacing:0.06em;margin-bottom:16px;display:block;">
-        All Things <em style="font-style:italic;color:var(--gold);">Adriano</em>
-      </span>
+      <img class="footer-logo" src="assets/logo/allthings-logo-white.png" alt="All Things Adriano"/>
       <p>Private boutique beauty studio in Chicago. By appointment only. Hair and skin services for aligned clients.</p>
     </div>
     <div class="footer-col">

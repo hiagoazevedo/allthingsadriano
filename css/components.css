@@ -52,11 +52,9 @@
 }
 
 /* ── TYPOGRAPHY UTILITIES ──────────────────
-   .body-text  — standard body copy (light background)
-   .img-caption — image placeholder / caption labels
+   .body-text — standard body copy (light background)
    ──────────────────────────────────────── */
-.body-text   { font-size:0.82rem; line-height:1.85; color:var(--ink-muted); }
-.img-caption { font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--stone); }
+.body-text { font-size:0.82rem; line-height:1.85; color:var(--ink-muted); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
