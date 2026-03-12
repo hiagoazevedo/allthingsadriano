@@ -25,7 +25,7 @@
 @media (max-width: 960px) {
   .hero { height:auto; grid-template-columns:1fr; min-height:auto; }
   .hero-right { min-height:55vw; order:-1; }
-  .hero-left { padding:48px 24px 64px; justify-content:flex-start; }
+  .hero-left { padding:40px 24px 64px; justify-content:flex-start; }
   .hero-location { left:24px; bottom:68px; gap: 10px}
   .hero-location::before {width: 12px;}
   .hero-detail-card { padding: 4px 10px; bottom: 8px; }

@@ -29,5 +29,8 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
-  .booking { grid-template-columns:1fr; gap:48px; }
+  .booking { grid-template-columns:1fr; gap:48px; padding: 80px 24px;}
+  .booking-body { margin-bottom: 28px;}
+  .meta-item {padding: 15px;}
+  .vagaro-cta { padding:48px 24px; }
 }

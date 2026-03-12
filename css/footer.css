@@ -13,6 +13,7 @@ footer { background:var(--ink); padding:64px; display:grid; grid-template-column
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
-  footer { padding:48px 24px; grid-template-columns:1fr; gap:36px; }
+  footer { padding:48px 24px; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:36px 24px; }
+  .footer-brand { grid-column: 1 / -1; }
   .footer-bottom { padding:16px 24px; flex-direction:column; gap:8px; text-align:center; }
 }

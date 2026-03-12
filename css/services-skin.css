@@ -26,4 +26,5 @@
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .services-skin { padding:80px 24px; }
+  .svc-header.light {padding-bottom: 20px; margin-bottom: 44px;}
 }

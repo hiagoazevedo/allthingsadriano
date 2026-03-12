@@ -38,7 +38,7 @@
    Resolves 6 identical padding declarations (.section-pad)
    and 2 identical grid declarations (.grid-3)
    ──────────────────────────────────────── */
-.section-pad { padding:140px 64px; }
+.section-pad { padding:80px 64px; }
 
 .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
 
