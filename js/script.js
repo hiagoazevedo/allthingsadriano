@@ -105,6 +105,16 @@ function closeMobile() {
   buildDots();
   goTo(0);
 
+  // Swipe support
+  const viewport = track.parentElement;
+  let swipeX = 0, swipeY = 0;
+  viewport.addEventListener('touchstart', e => { swipeX = e.touches[0].clientX; swipeY = e.touches[0].clientY; }, { passive: true });
+  viewport.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - swipeX;
+    const dy = e.changedTouches[0].clientY - swipeY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) goTo(currentPage + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
@@ -347,4 +357,13 @@ function closeMobile() {
     if (e.key === 'ArrowRight') navigate(1);
     if (e.key === 'ArrowLeft')  navigate(-1);
   });
+
+  // Swipe navigation
+  let lbSwipeX = 0, lbSwipeY = 0;
+  lightbox.addEventListener('touchstart', e => { lbSwipeX = e.touches[0].clientX; lbSwipeY = e.touches[0].clientY; }, { passive: true });
+  lightbox.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - lbSwipeX;
+    const dy = e.changedTouches[0].clientY - lbSwipeY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) navigate(dx < 0 ? 1 : -1);
+  }, { passive: true });
 })();

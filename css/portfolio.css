@@ -150,7 +150,7 @@
 
 @media (max-width: 960px) {
   .lightbox-img-wrap { width: 92vw; }
-  .lightbox-prev { left: 140px; bottom: 14px;}
-  .lightbox-next { right: 140px; bottom: 14px;}
+  .lightbox-prev { left: 140px; bottom: 12px;}
+  .lightbox-next { right: 140px; bottom: 12px;}
   .lightbox-close { top: 20px; right: 20px; }
 }
