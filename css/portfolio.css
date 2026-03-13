@@ -119,7 +119,7 @@
   position: absolute;
   background: none;
   border: none;
-  color: var(--stone);
+  color: var(--warm-white);
   font-family: 'Jost', sans-serif;
   font-size: 1rem;
   cursor: pointer;
@@ -129,7 +129,7 @@
 
 .lightbox-close:hover,
 .lightbox-prev:hover,
-.lightbox-next:hover { color: var(--warm-white); }
+.lightbox-next:hover { color: var(--stone-lt); }
 
 .lightbox-close { top: 32px; right: 40px; font-size: 0.9rem; letter-spacing: 0.05em; }
 .lightbox-prev  { left: 40px; font-size: 1.4rem; }
@@ -145,12 +145,12 @@
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--stone);
+  color: var(--stone-lt);
 }
 
 @media (max-width: 960px) {
   .lightbox-img-wrap { width: 92vw; }
-  .lightbox-prev { left: 16px; }
-  .lightbox-next { right: 16px; }
+  .lightbox-prev { left: 140px; bottom: 14px;}
+  .lightbox-next { right: 140px; bottom: 14px;}
   .lightbox-close { top: 20px; right: 20px; }
 }

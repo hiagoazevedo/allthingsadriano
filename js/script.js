@@ -265,6 +265,23 @@ function closeMobile() {
   document.querySelectorAll('.review-card').forEach(processCard);
 })();
 
+// ── HERO VIDEO AUTOPLAY (Safari fix) ──
+(function () {
+  const video = document.getElementById('heroVideo');
+  if (!video) return;
+  video.muted = true;
+  const tryPlay = () => video.play().catch(() => {});
+  if (video.readyState >= 2) {
+    tryPlay();
+  } else {
+    video.addEventListener('loadeddata', tryPlay, { once: true });
+    video.addEventListener('canplay', tryPlay, { once: true });
+  }
+  // Re-attempt on first user interaction in case autoplay was blocked
+  document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+  document.addEventListener('touchend', tryPlay, { once: true, passive: true });
+})();
+
 // ── PORTFOLIO LIGHTBOX ──
 (function () {
   const lightbox  = $('#lightbox');

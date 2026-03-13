@@ -31,6 +31,7 @@ nav.compact .hamburger span { background:var(--ink); }
 /* ── HAMBURGER ── */
 .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
 .hamburger span { display:block; width:24px; height:1px; background:rgba(255,255,255,0.85); transition:transform 0.3s, opacity 0.3s, background 0.5s; }
+.hamburger.open span { background:var(--ink); }
 .hamburger.open span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity:0; }
 .hamburger.open span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
