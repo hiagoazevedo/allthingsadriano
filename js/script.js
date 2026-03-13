@@ -3,24 +3,6 @@
    Depends on utils.js ($, $$, on, lockBody)
    ══════════════════════════════════════════ */
 
-/* ── CURSOR (desktop / fine pointer only) ── */
-const cursor = $('#cursor');
-const ring   = $('#cursor-ring');
-if (window.matchMedia('(pointer: fine)').matches) {
-  on(document, 'mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
-    setTimeout(() => {
-      ring.style.left = e.clientX + 'px';
-      ring.style.top  = e.clientY + 'px';
-    }, 80);
-  });
-  $$('a, button').forEach(el => {
-    on(el, 'mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2)'; ring.style.opacity = '0.15'; });
-    on(el, 'mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.opacity = '0.5'; });
-  });
-}
-
 /* ── NAVBAR COMPACT ON SCROLL ── */
 const navbar = $('#navbar');
 on(window, 'scroll', () => {
@@ -42,8 +24,8 @@ const revealObserver = new IntersectionObserver(entries => {
 $$('.reveal').forEach(el => revealObserver.observe(el));
 
 /* ── MOBILE MENU ──
-   Must remain globally scoped — HTML uses inline onclick="toggleMobile()" / onclick="closeMobile()"
-   ── */
+  Must remain globally scoped — HTML uses inline onclick="toggleMobile()" / onclick="closeMobile()"
+── */
 function toggleMobile() {
   const menu = $('#mobileMenu');
   const ham  = $('#hamburger');
@@ -72,15 +54,39 @@ function closeMobile() {
   function perPage()    { return window.innerWidth <= 960 ? 1 : 3; }
   function totalPages() { return Math.ceil(cards.length / perPage()); }
 
+  function makeDot(i) {
+    const btn = document.createElement('button');
+    btn.className = 'carousel-dot' + (i === currentPage ? ' active' : '');
+    btn.setAttribute('aria-label', 'Go to review group ' + (i + 1));
+    btn.addEventListener('click', () => goTo(i));
+    return btn;
+  }
+
+  function makeEllipsis() {
+    const el = document.createElement('span');
+    el.className = 'carousel-dots-ellipsis';
+    el.textContent = '…';
+    return el;
+  }
+
   function buildDots() {
     dotsWrap.innerHTML = '';
-    for (let i = 0; i < totalPages(); i++) {
-      const btn = document.createElement('button');
-      btn.className = 'carousel-dot' + (i === currentPage ? ' active' : '');
-      btn.setAttribute('aria-label', 'Go to review group ' + (i + 1));
-      btn.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(btn);
+    const total    = totalPages();
+    const isMobile = window.innerWidth <= 960;
+
+    if (!isMobile || total <= 5) {
+      for (let i = 0; i < total; i++) dotsWrap.appendChild(makeDot(i));
+      return;
     }
+
+    // Janela deslizante de 3 dots no mobile
+    let start = Math.max(0, currentPage - 1);
+    let end   = Math.min(total - 1, start + 2);
+    if (end - start < 2) start = Math.max(0, end - 2);
+
+    if (start > 0)         dotsWrap.appendChild(makeEllipsis());
+    for (let i = start; i <= end; i++) dotsWrap.appendChild(makeDot(i));
+    if (end < total - 1)   dotsWrap.appendChild(makeEllipsis());
   }
 
   function goTo(page) {
@@ -88,7 +94,7 @@ function closeMobile() {
     const gap       = 2;
     const cardWidth = cards[0].getBoundingClientRect().width;
     track.style.transform = 'translateX(-' + (currentPage * perPage() * (cardWidth + gap)) + 'px)';
-    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === currentPage));
+    buildDots();
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage >= totalPages() - 1;
   }

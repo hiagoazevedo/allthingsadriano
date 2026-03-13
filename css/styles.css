@@ -25,12 +25,8 @@ html { scroll-behavior: smooth; font-size: 16px; }
 body {
   background: var(--warm-white); color: var(--ink);
   font-family: 'Jost', sans-serif; font-weight: 300;
-  -webkit-font-smoothing: antialiased; overflow-x: hidden; cursor: none;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
 }
-
-/* ── CURSOR ── */
-.cursor { width:8px; height:8px; background:var(--gold); border-radius:50%; position:fixed; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform 0.1s, width 0.3s, height 0.3s; }
-.cursor-ring { width:32px; height:32px; border:1px solid var(--gold); border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:transform 0.15s ease-out, opacity 0.3s; opacity:0.5; }
 
 /* ── SHARED SECTION LABELS ── */
 .section-label { font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); font-weight:400; margin-bottom:24px; display:flex; align-items:center; gap:16px; }
@@ -54,7 +50,5 @@ body {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
-  body { cursor:auto; }
-  .cursor, .cursor-ring { display:none; }
   .section-pad { padding:80px 24px; }
 }

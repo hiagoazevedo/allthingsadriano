@@ -88,6 +88,7 @@
   transition:background 0.3s, transform 0.3s;
 }
 .carousel-dot.active { background:var(--gold); transform:scale(1.4); }
+.carousel-dots-ellipsis { color:rgba(255,255,255,0.3); font-size:0.7rem; line-height:1; user-select:none; padding:0 2px; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {

@@ -25,9 +25,6 @@
 </head>
 <body>
   
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursor-ring"></div>
-  
   <!-- MOBILE MENU OVERLAY -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="#about"         onclick="closeMobile()">About</a>
@@ -75,7 +72,6 @@
         <a href="#booking" class="btn-primary">Schedule a Consultation</a>
         <a href="#services-hair" class="btn-text">View Services</a>
       </div>
-      <div class="hero-location"><span>Chicago, Illinois</span></div>
     </div>
     <div class="hero-right">
       <video autoplay muted loop playsinline poster="assets/video/hero-poster.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
@@ -335,6 +331,23 @@
             alt="The Studio"
             loading="lazy"
             style="width:100%;height:100%;object-fit:cover;display:block;">
+          </picture>
+        </div>
+        <div class="studio-img">
+          <picture>
+            <source type="image/webp"
+            srcset="assets/images/webp/studio-2-480.webp 480w,
+            assets/images/webp/studio-2-700.webp 700w,
+            assets/images/webp/studio-2-900.webp 900w"
+            sizes="(max-width:960px) 50vw, 33vw">
+            <img src="assets/images/fallback/studio-2-900.jpg"
+            srcset="assets/images/fallback/studio-2-480.jpg 480w,
+            assets/images/fallback/studio-2-700.jpg 700w,
+            assets/images/fallback/studio-2-900.jpg 900w"
+            sizes="(max-width:960px) 50vw, 33vw"
+            alt="The Studio"
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
           </picture>
         </div>
       </div>
