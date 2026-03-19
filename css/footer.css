@@ -4,9 +4,9 @@
 
 footer { background:var(--ink); padding:64px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:48px; align-items:start; }
 .footer-logo { height:38px; width:auto; display:block; margin-bottom:20px; }
-.footer-brand p { font-size:0.75rem; color:rgba(255,255,255,0.3); line-height:1.7; }
+.footer-brand p { font-size:0.82rem; color:rgba(255,255,255,0.3); line-height:1.7; }
 .footer-col-title { font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
-.footer-col a, .footer-col p { display:block; font-size:0.78rem; color:rgba(255,255,255,0.4); text-decoration:none; margin-bottom:10px; transition:color 0.2s; line-height:1.6; }
+.footer-col a, .footer-col p { display:block; font-size:0.85rem; color:rgba(255,255,255,0.4); text-decoration:none; margin-bottom:10px; transition:color 0.2s; line-height:1.6; }
 .footer-col a:hover { color:var(--warm-white); }
 .footer-bottom { background:var(--ink); border-top:1px solid rgba(255,255,255,0.06); padding:20px 64px; display:flex; justify-content:space-between; align-items:center; }
 .footer-bottom p { font-size:0.62rem; color:rgba(255,255,255,0.2); letter-spacing:0.08em; }

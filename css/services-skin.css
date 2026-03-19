@@ -18,7 +18,7 @@
 .svc-card-light:hover { background:var(--sage-hover); border-color:#9AA896; }
 .svc-card-light .svc-num { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:300; color:var(--stone-lt); line-height:1; margin-bottom:28px; }
 .svc-card-light .svc-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:400; color:var(--ink); margin-bottom:16px; }
-.svc-card-light .svc-desc { font-size:0.82rem; color:var(--ink-muted); line-height:1.75; margin-bottom:28px; }
+.svc-card-light .svc-desc { font-size:0.90rem; color:var(--ink-muted); line-height:1.75; margin-bottom:28px; }
 .svc-card-light .svc-footer { display:flex; justify-content:space-between; align-items:center; padding-top:20px; border-top:1px solid var(--stone-lt); }
 .svc-card-light .svc-duration { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-faint); }
 .svc-card-light .svc-from { font-size:0.75rem; color:var(--sage-dk); letter-spacing:0.05em; }

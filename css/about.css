@@ -7,11 +7,11 @@
 .about-img-frame { aspect-ratio:3/4; background:var(--beige); position:relative; overflow:hidden; }
 .about-img-frame::after { content:''; position:absolute; bottom:-20px; right:-20px; width:80%; height:80%; border:1px solid var(--stone-lt); z-index:-1; }
 .about-img-label { position:absolute; top:80%; left:-1px; background:var(--gold); color:var(--warm-white); font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; padding:10px 20px; }
-.about-body { font-size:0.9rem; line-height:1.9; color:var(--ink-muted); font-weight:300; margin-bottom:20px; }
+.about-body { font-size:0.96rem; line-height:1.9; color:var(--ink-muted); font-weight:300; margin-bottom:20px; }
 .about-qualities { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:44px; }
 .quality-item { padding:20px 24px; background:var(--beige); border-left:2px solid var(--gold); }
 .quality-title { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); font-weight:400; margin-bottom:6px; }
-.quality-desc { font-size:0.78rem; color:var(--ink-faint); line-height:1.6; }
+.quality-desc { font-size:0.88rem; color:var(--ink-faint); line-height:1.6; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {

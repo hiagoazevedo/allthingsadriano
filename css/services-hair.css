@@ -18,14 +18,19 @@
 .svc-card-dark:hover { background:rgba(255,255,255,0.06); border-color:rgba(168,144,106,0.2); }
 .svc-card-dark .svc-num { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:300; color:rgba(255,255,255,0.06); line-height:1; margin-bottom:28px; }
 .svc-card-dark .svc-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:400; color:var(--warm-white); margin-bottom:16px; }
-.svc-card-dark .svc-desc { font-size:0.82rem; color:rgba(255,255,255,0.4); line-height:1.75; margin-bottom:28px; }
+.svc-card-dark .svc-desc { font-size:0.90rem; color:rgba(255,255,255,0.4); line-height:1.75; margin-bottom:28px; }
 .svc-card-dark .svc-footer { display:flex; justify-content:space-between; align-items:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.06); }
 .svc-card-dark .svc-duration { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.25); }
 .svc-card-dark .svc-from { font-size:0.75rem; color:var(--gold-lt); letter-spacing:0.05em; }
 
+.svc-specialty-note { text-align:right; align-self:flex-end; }
+.svc-specialty-label { font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.svc-specialty-text { font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:300; font-style:italic; color:rgba(255,255,255,0.55); line-height:1.65; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .services-hair { padding:80px 24px; }
-  .svc-header.dark {padding-bottom: 20px; margin-bottom: 44px;}
-  
+  .services-hair .svc-header.dark { flex-direction:column; align-items:flex-start; padding-bottom:20px; margin-bottom:44px; gap:20px; }
+  .svc-specialty-note { text-align:left; align-self: flex-start;}
+  .svc-specialty-text { font-size:0.8rem}
 }

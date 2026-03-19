@@ -4,13 +4,13 @@
    ══════════════════════════════════════════ */
 
 .booking { background:var(--beige); display:grid; grid-template-columns:1fr 1.3fr; gap:100px; align-items:start; }
-.booking-body { font-size:0.88rem; color:var(--ink-muted); line-height:1.9; margin-bottom:48px; }
+.booking-body { font-size:0.95rem; color:var(--ink-muted); line-height:1.9; margin-bottom:48px; }
 .booking-meta { display:flex; flex-direction:column; }
 .meta-item { display:flex; align-items:flex-start; gap:20px; padding:20px 0; border-bottom:1px solid var(--stone-lt); }
 .meta-item:last-child { border-bottom:none; }
 .meta-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:6px; }
 .meta-label { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:4px; }
-.meta-val { font-size:0.85rem; color:var(--ink-mid); font-weight:300; line-height:1.65; }
+.meta-val { font-size:0.92rem; color:var(--ink-mid); font-weight:300; line-height:1.65; }
 
 .booking-widget-wrap { background:var(--warm-white); border:1px solid var(--stone-lt); overflow:hidden; }
 .widget-header { padding:20px 28px; border-bottom:1px solid var(--beige); display:flex; justify-content:space-between; align-items:center; }
@@ -24,8 +24,11 @@
 .vagaro-cta-heading { font-family:'Playfair Display',serif; font-size:2rem; font-weight:300; line-height:1.15; letter-spacing:-0.01em; color:var(--ink); margin-bottom:24px; }
 .vagaro-cta-heading em { font-style:italic; color:var(--gold); }
 .vagaro-cta-rule { width:32px; height:1px; background:var(--stone-lt); margin:0 auto 24px; }
-.vagaro-cta-body { font-size:0.82rem; color:var(--ink-muted); line-height:1.85; margin-bottom:40px; }
+.vagaro-cta-body { font-size:0.90rem; color:var(--ink-muted); line-height:1.85; margin-bottom:40px; }
 .vagaro-cta-note { font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-faint); margin-top:20px; }
+.vagaro-cta-contact { font-size:0.75rem; color:var(--ink-faint); margin-top:16px; line-height:1.6; }
+.vagaro-cta-contact a { color:var(--ink-mid); text-decoration:none; border-bottom:1px solid var(--stone-lt); padding-bottom:1px; transition:color 0.2s, border-color 0.2s; }
+.vagaro-cta-contact a:hover { color:var(--ink); border-color:var(--ink); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {

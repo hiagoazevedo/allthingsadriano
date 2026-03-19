@@ -275,11 +275,13 @@ function closeMobile() {
   document.querySelectorAll('.review-card').forEach(processCard);
 })();
 
-// ── HERO VIDEO AUTOPLAY (Safari fix) ──
+// ── HERO VIDEO AUTOPLAY (Safari fix) + speed + loop fade ──
 (function () {
   const video = document.getElementById('heroVideo');
   if (!video) return;
   video.muted = true;
+  video.playbackRate = 0.90;
+
   const tryPlay = () => video.play().catch(() => {});
   if (video.readyState >= 2) {
     tryPlay();
@@ -290,6 +292,26 @@ function closeMobile() {
   // Re-attempt on first user interaction in case autoplay was blocked
   document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
   document.addEventListener('touchend', tryPlay, { once: true, passive: true });
+
+  // Smooth loop fade — dip to dark at end, clear at start
+  const fade = document.querySelector('.hero-video-fade');
+  if (!fade) return;
+  let fadingIn = false;
+  let prevTime = 0;
+  video.addEventListener('timeupdate', () => {
+    if (!video.duration) return;
+    const t = video.currentTime;
+    // Detect loop: jumped from near-end back to near-start
+    if (prevTime > video.duration - 2 && t < 1) {
+      setTimeout(() => { fade.classList.remove('fading'); fadingIn = false; }, 80);
+    }
+    // Begin fade ~1.5s before end
+    if (!fadingIn && video.duration - t <= 1.5) {
+      fadingIn = true;
+      fade.classList.add('fading');
+    }
+    prevTime = t;
+  });
 })();
 
 // ── PORTFOLIO LIGHTBOX ──

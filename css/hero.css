@@ -8,12 +8,14 @@
 .hero-h1 { font-family:'Playfair Display',serif; font-size:clamp(3rem,4.8vw,5.6rem); font-weight:300; line-height:1.02; letter-spacing:-0.02em; margin-bottom:28px; opacity:0; animation:revealUp 1s 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
 .hero-h1 em { font-style:italic; font-weight:300; color:var(--gold); }
 .hero-rule { width:40px; height:1px; background:var(--stone); margin-bottom:20px; opacity:0; animation:revealUp 1s 0.65s cubic-bezier(0.16,1,0.3,1) forwards; }
-.hero-sub { font-size:0.88rem; line-height:1.80; color:var(--ink-muted); max-width:360px; font-weight:300; margin-bottom:40px; opacity:0; animation:revealUp 1s 0.75s cubic-bezier(0.16,1,0.3,1) forwards; }
+.hero-sub { font-size:0.95rem; line-height:1.80; color:var(--ink-muted); max-width:360px; font-weight:300; margin-bottom:40px; opacity:0; animation:revealUp 1s 0.75s cubic-bezier(0.16,1,0.3,1) forwards; }
 .hero-actions { display:flex; align-items:center; gap:36px; opacity:0; animation:revealUp 1s 0.9s cubic-bezier(0.16,1,0.3,1) forwards; }
 .hero-right { background:var(--beige); position:relative; overflow:hidden; }
 .hero-right::before { content:''; position:absolute; inset:0; background:linear-gradient(160deg, transparent 60%, rgba(168,144,106,0.08) 100%); z-index:1; }
 /* Gradient overlay at top of video panel — improves nav contrast without affecting the hero-left */
 .hero-right::after { content:''; position:absolute; top:0; left:0; right:0; height:200px; background:linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, transparent 100%); pointer-events:none; z-index:2; }
+.hero-video-fade { position:absolute; inset:0; background:#000; opacity:0; pointer-events:none; transition:opacity 1.2s ease; z-index:1; }
+.hero-video-fade.fading { opacity:0.4; }
 .hero-detail-card { position:absolute; bottom:clamp(28px,4.5vh,56px); right:-1px; background:var(--warm-white); padding:24px 32px; border-left:3px solid var(--gold); opacity:0; animation:revealLeft 1s 1.2s cubic-bezier(0.16,1,0.3,1) forwards; z-index:3; }
 .hero-detail-label { font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
 .hero-detail-val { font-family:'Playfair Display',serif; font-size:1rem; font-weight:400; }

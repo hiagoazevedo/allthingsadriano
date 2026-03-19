@@ -6,13 +6,13 @@
 /* ── STUDIO ── */
 .studio { background:var(--warm-white); }
 .studio-inner { display:grid; grid-template-columns:1.1fr 1fr; gap:100px; align-items:center; }
-.studio-body { font-size:0.88rem; line-height:1.9; color:var(--ink-muted); margin-bottom:20px; }
+.studio-body { font-size:0.95rem; line-height:1.9; color:var(--ink-muted); margin-bottom:20px; }
 .studio-pillars { margin-top:48px; display:flex; flex-direction:column; }
 .pillar { display:flex; gap:24px; padding:24px 0; border-bottom:1px solid var(--beige); align-items:flex-start; }
 .pillar:last-child { border-bottom:none; }
 .pillar-num { font-family:'Playfair Display',serif; font-size:0.85rem; color:var(--gold); font-style:italic; min-width:24px; padding-top:2px; }
 .pillar-text strong { display:block; font-size:0.8rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink); margin-bottom:5px; }
-.pillar-text p { font-size:0.8rem; color:var(--ink-faint); line-height:1.65; }
+.pillar-text p { font-size:0.86rem; color:var(--ink-faint); line-height:1.65; }
 /* Grid 2×2: linha 1 alta, linha 2 curta */
 .studio-right { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .studio-img { background:var(--beige); overflow:hidden; }
