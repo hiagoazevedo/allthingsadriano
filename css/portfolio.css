@@ -145,7 +145,7 @@
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--stone-lt);
+  color: var(--warm-white);
 }
 
 @media (max-width: 960px) {
