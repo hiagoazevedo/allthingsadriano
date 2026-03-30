@@ -19,6 +19,15 @@
 .svc-card-dark .svc-num { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:300; color:rgba(255,255,255,0.06); line-height:1; margin-bottom:28px; }
 .svc-card-dark .svc-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:400; color:var(--warm-white); margin-bottom:16px; }
 .svc-card-dark .svc-desc { font-size:0.90rem; color:rgba(255,255,255,0.4); line-height:1.75; margin-bottom:28px; }
+.svc-price-list { list-style:none; margin:16px 0; padding:0; border-top:1px solid rgba(255,255,255,0.07); }
+.svc-price-list li { display:flex; align-items:baseline; gap:0; padding:10px 0; transition:padding-left 0.25s ease; cursor:default; }
+.svc-price-list li:hover { padding-left:6px; }
+.svc-price-list .spl-name { font-family:'Playfair Display',serif; font-size:0.80rem; font-style:italic; font-weight:400; color:rgba(255,255,255,0.55); white-space:nowrap; transition:color 0.25s; }
+.svc-price-list li:hover .spl-name { color:rgba(255,255,255,0.75); }
+.svc-price-list .spl-leader { flex:1; min-width:12px; border-bottom:1px dotted rgba(255,255,255,0.12); margin:0 10px 3px; }
+.svc-price-list .spl-price { font-size:0.66rem; color:var(--gold-lt); letter-spacing:0.10em; flex-shrink:0; transition:color 0.25s; }
+.svc-price-list li:hover .spl-price { color:var(--gold); }
+
 .svc-card-dark .svc-footer { display:flex; justify-content:space-between; align-items:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.06); }
 .svc-card-dark .svc-duration { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.25); }
 .svc-card-dark .svc-from { font-size:0.75rem; color:var(--gold-lt); letter-spacing:0.05em; }
@@ -26,6 +35,18 @@
 .svc-specialty-note { text-align:right; align-self:flex-end; }
 .svc-specialty-label { font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
 .svc-specialty-text { font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:300; font-style:italic; color:rgba(255,255,255,0.55); line-height:1.65; }
+
+/* Pricing disclaimer */
+.svc-disclaimer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.72rem;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0.02em;
+  max-width: 640px;
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {

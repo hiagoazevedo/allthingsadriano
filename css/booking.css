@@ -17,7 +17,7 @@
 .widget-header-title { font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--ink-muted); }
 .widget-header-note { font-size:0.6rem; letter-spacing:0.12em; color:var(--stone); }
 
-.vagaro-cta { padding:72px 48px; display:flex; align-items:center; justify-content:center; }
+.vagaro-cta { padding:48px; display:flex; align-items:center; justify-content:center; }
 .vagaro-cta-inner { text-align:center; max-width:380px; }
 .vagaro-cta-ornament { display:block; font-size:1rem; color:var(--gold); letter-spacing:0.4em; margin-bottom:28px; opacity:0.5; }
 .vagaro-cta-label { font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
